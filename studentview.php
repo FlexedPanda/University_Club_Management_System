@@ -9,10 +9,11 @@ $pin = $_GET['pin'];
 require_once('dbconnect.php');
 
 // Retrieve the club name based on user's designation, email, and pin
-$sql = "SELECT club FROM member WHERE designation = '$designation' AND email = '$email' AND pin = $pin";
+$sql = "SELECT club,student_id FROM member WHERE designation = '$designation' AND email = '$email' AND pin = $pin";
 $result = mysqli_query($conn, $sql);
 if ($row = mysqli_fetch_assoc($result)) {
     $clubname = $row['club'];
+    $student_id = $row['student_id'];
 } else {
     // Handle error or default club name if necessary
     $clubname = 'Default Club Name';
@@ -115,10 +116,7 @@ if ($row = mysqli_fetch_assoc($result)) {
     </div>
     
     <div class="club-info">
-        <img src="bracu_logo1.png" alt="Club Logo" class="club-logo"> <!-- Replace with the path to your club logo -->
-
-        
-
+        <img src="bracu_logo1.png" alt="Club Logo" class="club-logo">
         <h1 class="club-name"><?php echo $clubname; ?></h1>
     </div>
 
@@ -130,22 +128,22 @@ if ($row = mysqli_fetch_assoc($result)) {
                 $sql = "SELECT * FROM event";
                 $result = mysqli_query($conn, $sql);
                 if(mysqli_num_rows($result) > 0){
-                    //here we will print every row that is returned by our query $sql
                     while($row = mysqli_fetch_array($result)){
-                    //here we have to write some HTML code, so we will close php tag
-                ?>
+            ?>
             <div class="event">
                 <h3><?php echo $row[1]; ?></h3>
                 <p> Venue: <?php echo $row[5]; ?></p>
                 <p> Date: <?php echo $row[3]; ?></p>
-                <a href="joinevent.php?eventID=<?php echo $row[0]; ?>" class="join-event">Join Event</a>
+                <form action="joinevent.php" method="post">
+                    <input type="hidden" name="eventID" value="<?php echo $row[0]; ?>">
+                    <input type="hidden" name="studentID" value="<?php echo $student_id; ?>">
+                    <button type="submit" class="join-event-button">Join Event</button>
+                </form>
             </div>
-                
-                <?php 
+            <?php 
                     }                    
                 }
-                ?>
-            <!-- Add more events as needed -->
+            ?>
         </div>
     </div>
 
@@ -153,7 +151,6 @@ if ($row = mysqli_fetch_assoc($result)) {
         <h2>Panel Messages</h2>
         <p>Message 1</p>
         <p>Message 2</p>
-        <!-- Add more messages as needed -->
     </div>
 </body>
 </html>
