@@ -89,6 +89,9 @@
 
             <button type="submit">Login</button>
         </form>
+        <br>
+        <p>Not a member? <a href="signup.php">Sign Up</a></p>
+        
     </div>
 </body>
 </html>
