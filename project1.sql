@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 15, 2023 at 09:50 AM
+-- Generation Time: Aug 15, 2023 at 09:03 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -70,6 +70,28 @@ INSERT INTO `event` (`event_id`, `name`, `cost`, `date`, `capacity`, `vanue`, `o
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `has`
+--
+
+CREATE TABLE `has` (
+  `member_id` int(11) NOT NULL,
+  `club_name` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `has`
+--
+
+INSERT INTO `has` (`member_id`, `club_name`) VALUES
+(1, 'BULDF'),
+(12, 'bucc'),
+(12, 'bucc'),
+(12, 'bucc'),
+(18, 'BUCC');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `member`
 --
 
@@ -83,46 +105,25 @@ CREATE TABLE `member` (
   `gender` varchar(11) NOT NULL,
   `club` varchar(110) NOT NULL,
   `pin` int(11) NOT NULL,
-  `contact_no` int(11) NOT NULL,
-  `oca_id` int(11) NOT NULL
+  `contact_no` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `member`
 --
 
-INSERT INTO `member` (`student_id`, `name`, `designation`, `email`, `dob`, `department`, `gender`, `club`, `pin`, `contact_no`, `oca_id`) VALUES
-(1, 'ikramul', 'executive', 'ikramul@bra', '2003-08-01', 'cse', 'male', 'BULDF', 12345, 1994225023, 1),
-(2, 'Mo', 'general', 'mo@bracu.co', '2023-08-01', 'cse', 'female', 'BULDF', 12345, 1994225023, 1),
-(0, 'abira', 'executive', 'abira@gmail.com', '2023-08-01', 'cse', 'female', 'BUCC', 12345, 1994225023, 1),
-(21, 'Vader', 'president', 'president@gmail.com', '2015-08-05', 'cse', 'male', 'BUCC', 12345, 1994225024, 1);
+INSERT INTO `member` (`student_id`, `name`, `designation`, `email`, `dob`, `department`, `gender`, `club`, `pin`, `contact_no`) VALUES
+(2, 'Mo', 'general', 'mo@bracu.co', '2023-08-01', 'cse', 'female', 'BULDF', 12345, 1994225023),
+(11, 'abira', 'executive', 'abira@gmail.com', '2023-08-01', 'cse', 'female', 'BUCC', 12345, 1994225023),
+(12, 'Panda', 'executive', 'boysir7@gmail.com', '0000-00-00', 'eee', 'male', 'bucc', 12345, 12222),
+(18, 'Panda', 'member', 'panda@gmail.com', '2000-07-12', 'cse', 'male', 'BUCC', 12345, 12345),
+(21, 'Vader', 'president', 'president@gmail.com', '2015-08-05', 'cse', 'male', 'BUCC', 12345, 1994225024);
 
--- --------------------------------------------------------
-
---
--- Table structure for table `advisor`
---
-
-CREATE TABLE `advisor` (
- `email` varchar(40) NOT NULL,
- `name` varchar(40) NOT NULL,
- `pin` int(11) NOT NULL,
- `id` int(11) NOT NULL,
- `Bank_account` int(11) NOT NULL,
- PRIMARY KEY (`Bank_account`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
-    
---
--- Dumping data for table `advisor`
---
-
-INSERT INTO `advisor` (`email`, `name`, `pin`, `id`, `Bank_account`) VALUES ('Kazi@gmail.com', 'Kazi Ahmed', '12345', '1', '12345678');
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `oca`
 --
-
 
 CREATE TABLE `oca` (
   `employee_id` int(100) NOT NULL,
@@ -148,14 +149,24 @@ CREATE TABLE `participate` (
 --
 
 INSERT INTO `participate` (`member_id`, `event_id`) VALUES
-(0, 1),
-(0, 3),
-(0, 1),
-(1, 1),
-(0, 1),
-(0, 3),
-(0, 1),
-(0, 3);
+(21, 1);
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `member`
+--
+ALTER TABLE `member`
+  ADD PRIMARY KEY (`student_id`),
+  ADD UNIQUE KEY `email` (`email`);
+
+--
+-- Indexes for table `participate`
+--
+ALTER TABLE `participate`
+  ADD PRIMARY KEY (`member_id`,`event_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
