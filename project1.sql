@@ -100,8 +100,29 @@ INSERT INTO `member` (`student_id`, `name`, `designation`, `email`, `dob`, `depa
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `advisor`
+--
+
+	CREATE TABLE `advisor` (
+ `email` varchar(40) NOT NULL,
+ `name` varchar(40) NOT NULL,
+ `pin` int(11) NOT NULL,
+ `id` int(11) NOT NULL,
+ `Bank_account` int(11) NOT NULL,
+ PRIMARY KEY (`Bank_account`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
+    
+--
+-- Dumping data for table `advisor`
+--
+
+INSERT INTO `advisor` (`email`, `name`, `pin`, `id`, `Bank_account`) VALUES ('Kazi@gmail.com', 'Kazi Ahmed', '12345', '1', '12345678');
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `oca`
 --
+
 
 CREATE TABLE `oca` (
   `employee_id` int(100) NOT NULL,
