@@ -19,8 +19,13 @@ if(isset($_POST['userType']) && isset($_POST['designation'])&& isset($_POST['ema
 if(mysqli_num_rows($result) != 0 ){
     // Redirect to studentview.php and pass the variables using URL parameters
 	if ($u == 'member'){
+		if ($p=="president"){
+			header("Location: panelview.php?userType=$u&designation=$p&email=$x&pin=$y");
+			exit();			
+		}
+		else{
     header("Location: studentview.php?userType=$u&designation=$p&email=$x&pin=$y");
-    exit();}
+    exit();}}
 	
 }
 	else{
