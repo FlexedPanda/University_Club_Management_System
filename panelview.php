@@ -198,30 +198,87 @@ if ($row = mysqli_fetch_assoc($result)) {
         border-radius: 3px;
         margin-right: 5px;
     }
+
+
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            /* Add styles for table cells */
+            border: 1px solid rgba(0, 0, 0, 0.5); /* Transparent black border */
+            padding: 10px;
+            background-color: #007BFF; /* Blue background */
+            color: white;
+        }
+
+        th {
+            /* Add styles for table header cells */
+            background-color: rgba(0, 0, 0, 0.5); /* Transparent black background */
+            color: white;
+        }
+
+        .edit-member {
+            /* Add styles for the edit button */
+            background-color: #F8F9FA; /* Off-white */
+            color: #007BFF; /* Perfect Blue text color */
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+
+
+
+
 </style>
 
 
 
 <div class="search-member">
-    <h2>Search Member</h2>
-    <div class="search-form">
-        <!-- Add your search form here -->
-    </div>
-    <div class="search-results">
-        <?php
-            // Display search results
-            // Replace this with your search query and loop
-            for ($i = 1; $i <= 5; $i++) {
-        ?>
-        <div class="member-result">
-            <p>Member <?php echo $i; ?></p>
-            <button class="edit-member">Edit</button>
+        <h2 class="section-heading">Search Member</h2>
+        <div class="member-table">
+            <table>
+                <tr>
+                    <th>Student ID</th>
+                    <th>Name</th>
+                    <th>Designation</th>
+                    <th>Email</th>
+                    <th>Date of Birth</th>
+                    <th>Department</th>
+                    <th>Gender</th>
+                    <th>PIN</th>
+                    <th>Contact No</th>
+                    <th>Edit</th>
+                </tr>
+                <?php 
+                require_once("dbconnect.php");
+                $sql = "SELECT * FROM member";
+                $result = mysqli_query($conn, $sql);
+                if(mysqli_num_rows($result) > 0){
+                    while($row = mysqli_fetch_array($result)){
+            ?>
+                <tr>
+                    <td><?php echo $row[0]; ?></td>
+                    <td><?php echo $row[1]; ?></td>
+                    <td><?php echo $row[2]; ?></td>
+                    <td><?php echo $row[3]; ?></td>
+                    <td><?php echo $row[4]; ?></td>
+                    <td><?php echo $row[5]; ?></td>
+                    <td><?php echo $row[6]; ?></td>
+                    <td><?php echo $row[8]; ?></td>
+                    <td><?php echo $row[9]; ?></td>
+                    <td><button class="edit-member">Edit</button></td>
+                </tr>
+                <?php
+}
+                    }
+                ?>
+            </table>
         </div>
-        <?php
-            }
-        ?>
     </div>
-</div>
 
 <div class="post-message">
     <h2>Post a Message</h2>
