@@ -103,7 +103,7 @@ INSERT INTO `member` (`student_id`, `name`, `designation`, `email`, `dob`, `depa
 -- Table structure for table `advisor`
 --
 
-	CREATE TABLE `advisor` (
+CREATE TABLE `advisor` (
  `email` varchar(40) NOT NULL,
  `name` varchar(40) NOT NULL,
  `pin` int(11) NOT NULL,
