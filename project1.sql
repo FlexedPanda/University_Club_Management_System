@@ -143,6 +143,23 @@ CREATE TABLE `participate` (
   `event_id` int(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+-- --------------------------------------------------------
+
+--
+--
+CREATE TABLE `incoming_requests` (
+ `Student_ID` int(100) NOT NULL,
+ `Name` varchar(50) NOT NULL,
+ `Pin` int(11) NOT NULL,
+ `Email` varchar(40) NOT NULL,
+ `date_of_birth` date NOT NULL,
+ `department` varchar(50) NOT NULL,
+ `Gender` varchar(50) NOT NULL,
+ `Club` varchar(50) NOT NULL,
+ `contact_no` int(50) NOT NULL,
+ PRIMARY KEY (`Student_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 --
 -- Dumping data for table `participate`
 --
