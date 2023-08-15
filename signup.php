@@ -36,18 +36,6 @@ if (isset($_POST['reg_user'])) {
         exit();
 	}
 
-    /*
-	if (count($errors) == 0) {
-		include 'registration/upload.php';
-        $clb_query = "SELECT * FROM clubinfo WHERE club_ID='$clubID'";
-		$clb_rslt = mysqli_query($db, $clb_query);
-		if (mysqli_num_rows($clb_rslt) == 1) {
-			while($row = mysqli_fetch_assoc($clb_rslt)) {
-				$clubname = $row['club_Name'];
-				}
-			}
-    */
-
 	$sql1 = "INSERT INTO member VALUES ('$stdid','$name','$desig','$email','$dob','$dept','$gender','$club','$pin_1','$contact')";
 
 	$sql2 = "INSERT INTO has VALUES ('$stdid', '$club')";
