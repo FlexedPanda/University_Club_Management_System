@@ -26,6 +26,11 @@ if(mysqli_num_rows($result) != 0 ){
 		else{
     header("Location: studentview.php?userType=$u&designation=$p&email=$x&pin=$y");
     exit();}}
+	elseif ($u == 'advisor'){
+		if ($p=="advisor"){
+			header("Location: advisor.php?userType=$u&designation=$p&email=$x&pin=$y");
+			exit();			
+		}}
 	
 }
 	else{
