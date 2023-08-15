@@ -24,7 +24,6 @@ if ($row = mysqli_fetch_assoc($result)) {
 ?>
 
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -271,7 +270,7 @@ if ($row = mysqli_fetch_assoc($result)) {
                     <td><?php echo $row[6]; ?></td>
                     <td><?php echo $row[8]; ?></td>
                     <td><?php echo $row[9]; ?></td>
-                    <td><button class="edit-member">Edit</button></td>
+                    <td><a href="edit_member.php?student_id=<?php echo $row[0]; ?>&name=<?php echo $row[1]; ?>&designation=<?php echo $row[2]; ?>&email=<?php echo $row[3]; ?>&dob=<?php echo $row[4]; ?>&department=<?php echo $row[5]; ?>&gender=<?php echo $row[6]; ?>&pin=<?php echo $row[8]; ?>&contact_no=<?php echo $row[9]; ?>" class="edit-member">Edit Member Details</a></td>
                 </tr>
                 <?php
 }

@@ -15,6 +15,5 @@ if (mysqli_query($conn, $sql)) {
 }
 
 // Close the database connection
-mysqli_close($conn);             
-
+mysqli_close($conn);
 ?>
