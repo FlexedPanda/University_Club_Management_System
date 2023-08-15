@@ -76,6 +76,7 @@
                 <option value="member">member</option>
                 <option value="oca">OCA</option>
                 <option value="department">Department</option>
+                <option value="advisor">Advisor</option>
             </select>
 
             <label for="designation">Designation</label>
@@ -91,7 +92,6 @@
         </form>
         <br>
         <p>Not a member? <a href="signup.php">Sign Up</a></p>
-        
     </div>
 </body>
 </html>
