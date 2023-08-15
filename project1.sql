@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 14, 2023 at 10:35 PM
+-- Generation Time: Aug 15, 2023 at 09:50 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -94,7 +94,8 @@ CREATE TABLE `member` (
 INSERT INTO `member` (`student_id`, `name`, `designation`, `email`, `dob`, `department`, `gender`, `club`, `pin`, `contact_no`, `oca_id`) VALUES
 (1, 'ikramul', 'executive', 'ikramul@bra', '2003-08-01', 'cse', 'male', 'BULDF', 12345, 1994225023, 1),
 (2, 'Mo', 'general', 'mo@bracu.co', '2023-08-01', 'cse', 'female', 'BULDF', 12345, 1994225023, 1),
-(0, 'abira', 'executive', 'abira@gmail.com', '2023-08-01', 'cse', 'female', 'BUCC', 12345, 1994225023, 1);
+(0, 'abira', 'executive', 'abira@gmail.com', '2023-08-01', 'cse', 'female', 'BUCC', 12345, 1994225023, 1),
+(21, 'Vader', 'president', 'president@gmail.com', '2015-08-05', 'cse', 'male', 'BUCC', 12345, 1994225024, 1);
 
 -- --------------------------------------------------------
 
@@ -130,7 +131,10 @@ INSERT INTO `participate` (`member_id`, `event_id`) VALUES
 (0, 3),
 (0, 1),
 (1, 1),
-(0, 1);
+(0, 1),
+(0, 3),
+(0, 1),
+(0, 3);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
