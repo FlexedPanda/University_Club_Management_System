@@ -185,7 +185,7 @@ INSERT INTO `advisor` (`email`, `name`, `pin`, `id`, `Bank_account`, `designatio
 
 --
 -- Table structure for table `sponsor`
---CREATE TABLE `sponsor` (
+CREATE TABLE `sponsor` (
  `contact_no` varchar(40) NOT NULL,
  `name` varchar(40) NOT NULL,
  `funding` int(11) NOT NULL,
