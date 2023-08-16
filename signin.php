@@ -31,6 +31,10 @@ if(isset($_POST['userType']) && isset($_POST['designation'])&& isset($_POST['ema
 			header("Location: ocaview.php?userType=$u&designation=$p&email=$x&pin=$y");
 			exit();
 		}
+		elseif ($u == 'department'){
+			header("Location: department_view.php?userType=$u&designation=$p&email=$x&pin=$y");
+			exit();
+		}
 	}
 
 	else{
