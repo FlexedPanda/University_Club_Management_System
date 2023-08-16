@@ -67,23 +67,24 @@ INSERT INTO `departmentmessages` (`departmentname`, `message`) VALUES
 --
 
 CREATE TABLE `event` (
-  `event_id` int(100) NOT NULL,
-  `name` varchar(100) NOT NULL,
-  `cost` int(100) NOT NULL,
-  `date` date NOT NULL,
-  `capacity` int(100) NOT NULL,
-  `vanue` varchar(100) NOT NULL,
-  `oca_id` int(100) NOT NULL,
-  `club_name` varchar(100) NOT NULL
+ `event_id` int(100) NOT NULL,
+ `name` varchar(100) NOT NULL,
+ `cost` int(100) NOT NULL,
+ `date` date NOT NULL,
+ `capacity` int(100) NOT NULL,
+ `vanue` varchar(100) NOT NULL,
+ `oca_id` int(100) NOT NULL,
+ `club_name` varchar(100) NOT NULL,
+ `money_received` int(11) NOT NULL,
+ PRIMARY KEY (`event_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
 --
 -- Dumping data for table `event`
 --
 
-INSERT INTO `event` (`event_id`, `name`, `cost`, `date`, `capacity`, `vanue`, `oca_id`, `club_name`) VALUES
-(1, 'Robo Carnival', 10000, '2023-08-22', 1000, 'UB2', 2, 'robu'),
-(3, 'Lets Dance', 5000, '2023-08-15', 200, 'UB3', 2, 'BULDF');
+INSERT INTO `event` (`event_id`, `name`, `cost`, `date`, `capacity`, `vanue`, `oca_id`, `club_name`, `money_received`) VALUES 
+('1', 'Robo Carnival', '10000', '2023-08-22', '1000', 'UB2', '2', 'robu', '0'),
+(3, 'Lets Dance', 5000, '2023-08-15', 200, 'UB3', 2, 'BULDF','0');
 
 -- --------------------------------------------------------
 
@@ -167,9 +168,40 @@ INSERT INTO `member` (`student_id`, `name`, `designation`, `email`, `dob`, `depa
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `advisor`
+--
+CREATE TABLE `advisor` (
+ `email` varchar(40) NOT NULL,
+ `name` varchar(40) NOT NULL,
+ `pin` int(11) NOT NULL,
+ `id` int(11) NOT NULL,
+ `Bank_account` int(11) NOT NULL,
+ `designation` varchar(20) NOT NULL,
+ `balance` int(11) NOT NULL,
+ PRIMARY KEY (`Bank_account`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+INSERT INTO `advisor` (`email`, `name`, `pin`, `id`, `Bank_account`, `designation`, `balance`) VALUES ('Kazi@gmail.com', 'Kazi Ahmed', '12345', '1', '12345678', 'advisor', '0');
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `sponsor`
+--CREATE TABLE `sponsor` (
+ `contact_no` varchar(40) NOT NULL,
+ `name` varchar(40) NOT NULL,
+ `funding` int(11) NOT NULL,
+ `advisor_account` int(11) NOT NULL,
+ `oca_id` int(11) NOT NULL,
+ PRIMARY KEY (`contact_no`),
+ KEY `oca_id` (`oca_id`),
+ KEY `advisor_account` (`advisor_account`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+INSERT INTO `sponsor` (`contact_no`, `name`, `funding`, `advisor_account`, `oca_id`) VALUES ('0178', 'XY Bank', '15000', '12345678', '1');
+  
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `oca`
 --
-
 CREATE TABLE `oca` (
   `employee_id` int(100) NOT NULL,
   `pin` int(100) NOT NULL,
