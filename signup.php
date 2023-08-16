@@ -35,12 +35,12 @@ if (isset($_POST['reg_user'])) {
 		echo "Phone number is already used.";
         exit();
 	}
+	$sql1 = "INSERT INTO incoming_request VALUES ('$stdid','$name','$desig','$email','$dob','$dept','$gender','$club','$pin_1','$contact')";
+	//$sql1 = "INSERT INTO member VALUES ('$stdid','$name','$desig','$email','$dob','$dept','$gender','$club','$pin_1','$contact')";
 
-	$sql1 = "INSERT INTO member VALUES ('$stdid','$name','$desig','$email','$dob','$dept','$gender','$club','$pin_1','$contact')";
-
-	$sql2 = "INSERT INTO has VALUES ('$stdid', '$club')";
+	//$sql2 = "INSERT INTO has VALUES ('$stdid', '$club')";
 
 	$result1 = mysqli_query($conn, $sql1);
-    $reslt2 = mysqli_query($conn, $sql2);
+    //$reslt2 = mysqli_query($conn, $sql2);
     header('Location: login.php');
 }

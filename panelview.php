@@ -147,24 +147,50 @@ if ($row = mysqli_fetch_assoc($result)) {
         </div>
     </div>
 
-    <div class="member-requests">
-    <h2 class="section-heading">Incoming Member Requests</h2>
-    <div class="incoming-requests">
-        <?php
-            // Fetch and display incoming member requests
-            // Replace this with your database query and loop
-            for ($i = 1; $i <= 5; $i++) {
-        ?>
-        <div class="request">
-            <p>Request <?php echo $i; ?></p>
-            <button class="accept-request">Accept</button>
-            <button class="reject-request">Reject</button>
+    <div class="incoming_request">
+        <h2 class="section-heading">Incoming Request</h2>
+        <div class="incoming_member-table">
+            <table>
+                <tr>
+                    <th>Student ID</th>
+                    <th>Name</th>
+                    <th>Designation</th>
+                    <th>Email</th>
+                    <th>Date of Birth</th>
+                    <th>Department</th>
+                    <th>Gender</th>
+                    <th>PIN</th>
+                    <th>Contact No</th>
+                    <th>Accept</th>
+                    <th>Reject</th>
+                </tr>
+                <?php 
+                require_once("dbconnect.php");
+                $sql = "SELECT * FROM incoming_request";
+                $result = mysqli_query($conn, $sql);
+                if(mysqli_num_rows($result) > 0){
+                    while($row = mysqli_fetch_array($result)){
+            ?>
+                <tr>
+                    <td><?php echo $row[0]; ?></td>
+                    <td><?php echo $row[1]; ?></td>
+                    <td><?php echo $row[2]; ?></td>
+                    <td><?php echo $row[3]; ?></td>
+                    <td><?php echo $row[4]; ?></td>
+                    <td><?php echo $row[5]; ?></td>
+                    <td><?php echo $row[6]; ?></td>
+                    <td><?php echo $row[8]; ?></td>
+                    <td><?php echo $row[9]; ?></td>
+                    <td><a href="accept_member.php?student_id=<?php echo $row[0]; ?>&name=<?php echo $row[1]; ?>&designation=<?php echo $row[2]; ?>&email=<?php echo $row[3]; ?>&dob=<?php echo $row[4]; ?>&department=<?php echo $row[5]; ?>&gender=<?php echo $row[6]; ?>&club=<?php echo $clubname; ?>&pin=<?php echo $row[8]; ?>&contact_no=<?php echo $row[9]; ?>" class="Accept_member">Accept</a></td>
+                    <td><a href="reject_member.php?student_id=<?php echo $row[0]; ?>&name=<?php echo $row[1]; ?>&designation=<?php echo $row[2]; ?>&email=<?php echo $row[3]; ?>&dob=<?php echo $row[4]; ?>&department=<?php echo $row[5]; ?>&gender=<?php echo $row[6]; ?>&club=<?php echo $clubname; ?>&pin=<?php echo $row[8]; ?>&contact_no=<?php echo $row[9]; ?>" class="Reject_member">Reject</a></td>
+                </tr>
+                <?php
+}
+                    }
+                ?>
+            </table>
         </div>
-        <?php
-            }
-        ?>
     </div>
-</div>
 
 <style>
     .section-heading {

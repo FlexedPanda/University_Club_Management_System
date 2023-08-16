@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 15, 2023 at 09:03 PM
+-- Generation Time: Aug 16, 2023 at 03:59 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -87,7 +87,29 @@ INSERT INTO `has` (`member_id`, `club_name`) VALUES
 (12, 'bucc'),
 (12, 'bucc'),
 (12, 'bucc'),
-(18, 'BUCC');
+(18, 'BUCC'),
+(44, 'BUCC'),
+(49, 'BUCC'),
+(50, 'BUCC');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `incoming_request`
+--
+
+CREATE TABLE `incoming_request` (
+  `student_id` int(11) NOT NULL,
+  `name` varchar(110) NOT NULL,
+  `designation` varchar(11) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `dob` date NOT NULL,
+  `department` varchar(100) NOT NULL,
+  `gender` varchar(100) NOT NULL,
+  `club` varchar(100) NOT NULL,
+  `pin` int(100) NOT NULL,
+  `contact_no` int(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -113,11 +135,14 @@ CREATE TABLE `member` (
 --
 
 INSERT INTO `member` (`student_id`, `name`, `designation`, `email`, `dob`, `department`, `gender`, `club`, `pin`, `contact_no`) VALUES
-(2, 'Mo', 'general', 'mo@bracu.co', '2023-08-01', 'cse', 'female', 'BULDF', 12345, 1994225023),
+(2, 'Mouly', 'general', 'mo@bracu.co', '2023-08-01', 'cse', 'female', 'BULDF', 12345, 1994225023),
 (11, 'abira', 'executive', 'abira@gmail.com', '2023-08-01', 'cse', 'female', 'BUCC', 12345, 1994225023),
 (12, 'Panda', 'executive', 'boysir7@gmail.com', '0000-00-00', 'eee', 'male', 'bucc', 12345, 12222),
 (18, 'Panda', 'member', 'panda@gmail.com', '2000-07-12', 'cse', 'male', 'BUCC', 12345, 12345),
-(21, 'Vader', 'president', 'president@gmail.com', '2015-08-05', 'cse', 'male', 'BUCC', 12345, 1994225024);
+(21, 'Vader', 'president', 'president@gmail.com', '2015-08-05', 'cse', 'male', 'BUCC', 12345, 1994225024),
+(44, 'John Wick', 'executive', 'john@gmail.com', '2005-01-10', 'llb', 'male', 'BUCC', 12345, 91911),
+(49, 'Riaz', 'general', 'riaz@gmail.com', '2000-03-05', 'eee', 'male', 'BUCC', 12345, 1112220004),
+(50, 'Rasel', 'general', 'rasel@gmail.com', '2001-05-06', 'bba', 'male', 'BUCC', 12345, 7535335);
 
 -- --------------------------------------------------------
 
@@ -144,29 +169,13 @@ CREATE TABLE `participate` (
   `event_id` int(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- --------------------------------------------------------
-
---
---
-CREATE TABLE `incoming_requests` (
- `Student_ID` int(100) NOT NULL,
- `Name` varchar(50) NOT NULL,
- `Pin` int(11) NOT NULL,
- `Email` varchar(40) NOT NULL,
- `date_of_birth` date NOT NULL,
- `department` varchar(50) NOT NULL,
- `Gender` varchar(50) NOT NULL,
- `Club` varchar(50) NOT NULL,
- `contact_no` int(50) NOT NULL,
- PRIMARY KEY (`Student_ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
 --
 -- Dumping data for table `participate`
 --
 
 INSERT INTO `participate` (`member_id`, `event_id`) VALUES
-(21, 1);
+(21, 1),
+(44, 1);
 
 --
 -- Indexes for dumped tables
