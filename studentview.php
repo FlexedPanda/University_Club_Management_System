@@ -35,7 +35,7 @@ if ($row = mysqli_fetch_assoc($result)) {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-image: url('bracubackground.jpg'); /* Replace with the path to your background image */
+            background-image: url('img/bracubackground.jpg'); /* Replace with the path to your background image */
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -116,7 +116,7 @@ if ($row = mysqli_fetch_assoc($result)) {
     </div>
     
     <div class="club-info">
-        <img src="bracu_logo1.png" alt="Club Logo" class="club-logo">
+        <img src="img/bracu_logo.png" alt="Club Logo" class="club-logo">
         <h1 class="club-name"><?php echo $clubname; ?></h1>
     </div>
 
