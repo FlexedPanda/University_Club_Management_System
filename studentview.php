@@ -45,11 +45,11 @@ if ($row = mysqli_fetch_assoc($result)) {
             position: fixed;
             top: 0;
             right: 0;
-            text-align: right;
+            text-align: center;
             border-bottom: 2px solid #B6D0E2; /* Perfect Blue border */
             background-color: #B6D0E2; /* Perfect Blue background */
-            padding: 10px;
-            width: 30%; /* Adjust the width as needed */
+            padding: 05px;
+            width: 15%; /* Adjust the width as needed */
             box-sizing: border-box;
             z-index: 100;
         }
@@ -57,7 +57,11 @@ if ($row = mysqli_fetch_assoc($result)) {
         .navbar a {
             color: white;
             text-decoration: none;
-            margin: 0 10px;
+            margin: 0 5px;
+        }
+
+        .navbar a:hover {
+            color: #314b9b;
         }
 
         .club-info {
@@ -142,12 +146,33 @@ if ($row = mysqli_fetch_assoc($result)) {
 </head>
 <body>
     <div class="navbar">
-        <a href="logout.php">Logout</a>
+        <a href='department_list.php'>Department</a>
+        <a href='club_list.php'>Club</a>
+        <a href="logout.php">Log out</a>
     </div>
     
     <div class="club-info">
         <img src="img/bracu_logo.png" alt="Club Logo" class="club-logo">
         <h1 class="club-name"><?php echo $clubname; ?></h1>
+    </div>
+
+    <div class="Dept-messages">
+    <?php 
+                require_once("dbconnect.php");
+                $sql = "SELECT * FROM departmentmessages";
+                $result = mysqli_query($conn, $sql);
+                if(mysqli_num_rows($result) > 0){
+                    while($row = mysqli_fetch_array($result)){
+            ?>
+            <div class="departmentmessages">
+                <h3><?php echo $row[0]; ?></h3>
+                <p> Message: <?php echo $row[1]; ?></p>
+                
+            </div>
+            <?php 
+                    }                    
+                }
+            ?>
     </div>
 
     <div class="events-section">
@@ -177,23 +202,5 @@ if ($row = mysqli_fetch_assoc($result)) {
         </div>
     </div>
 
-    <div class="Dept-messages">
-    <?php 
-                require_once("dbconnect.php");
-                $sql = "SELECT * FROM departmentmessages";
-                $result = mysqli_query($conn, $sql);
-                if(mysqli_num_rows($result) > 0){
-                    while($row = mysqli_fetch_array($result)){
-            ?>
-            <div class="departmentmessages">
-                <h3><?php echo $row[0]; ?></h3>
-                <p> Message: <?php echo $row[1]; ?></p>
-                
-            </div>
-            <?php 
-                    }                    
-                }
-            ?>
-    </div>
 </body>
 </html>
