@@ -46,8 +46,8 @@ if ($row = mysqli_fetch_assoc($result)) {
             top: 0;
             right: 0;
             text-align: right;
-            border-bottom: 2px solid #007BFF; /* Perfect Blue border */
-            background-color: #007BFF; /* Perfect Blue background */
+            border-bottom: 2px solid #6495ED; /* Perfect Blue border */
+            background-color: #6495ED; /* Perfect Blue background */
             padding: 10px;
             width: 30%; /* Adjust the width as needed */
             box-sizing: border-box;
@@ -91,12 +91,12 @@ if ($row = mysqli_fetch_assoc($result)) {
             border: 1px solid #ccc;
             padding: 10px;
             margin-bottom: 10px;
-            background-color: #007BFF; /* Blue background */
+            background-color: #6495ED; /* Blue background */
         }
 
         .join-event {
             background-color: #F8F9FA; /* Off-white */
-            color: #007BFF; /* Perfect Blue text color */
+            color: #6495ED; /* Perfect Blue text color */
             border: none;
             padding: 5px 10px;
             cursor: pointer;
@@ -185,13 +185,13 @@ if ($row = mysqli_fetch_assoc($result)) {
         border: 1px solid rgba(0, 0, 0, 0.5); /* Transparent black border */
         padding: 10px;
         margin-bottom: 10px;
-        background-color: #007BFF; /* Blue background */
+        background-color: #6495ED; /* Blue background */
     }
 
     .accept-request,
     .reject-request {
         background-color: #F8F9FA; /* Off-white */
-        color: #007BFF; /* Perfect Blue text color */
+        color: #6495ED; /* Perfect Blue text color */
         border: none;
         padding: 5px 10px;
         cursor: pointer;
