@@ -143,10 +143,18 @@ if ($row = mysqli_fetch_assoc($result)) {
         </div>
     </div>
 
-    <div class="panel-messages">
-        <h2>Panel Messages</h2>
-        <p>Message 1</p>
-        <p>Message 2</p>
+    <div class="post-message">
+    <h2>Post a Message</h2>
+    <div class="message-form">
+    <form action="postmessage.php?dept_name=<?php echo $clubname; ?>" method="post">
+
+    <textarea name="message" rows="4" cols="50" placeholder="Type your message here"></textarea>
+    <button type="submit" class="post-message-button">Post Message</button>
+</form>
+
+
+
     </div>
+</div>
 </body>
 </html>

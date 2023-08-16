@@ -255,7 +255,32 @@ if ($row = mysqli_fetch_assoc($result)) {
             cursor: pointer;
             border-radius: 3px;
         }
+        .Dept-messages {
+        padding: 20px;
+        background-color: rgba(0, 0, 0, 0.7);
+        color: white;
+        font-family: Arial, sans-serif;
+        margin-top: 20px;
+    }
 
+    .departmentmessages {
+        border: 1px solid #ccc;
+        padding: 10px;
+        margin-bottom: 10px;
+        background-color: rgba(0, 0, 0, 0.5); /* Background color similar to ongoing events */
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-weight: bold;
+    }
+
+    .departmentmessages h3 {
+        color: #B6D0E2; /* Perfect Blue text color */
+        font-size: 18px;
+    }
+
+    .departmentmessages p {
+        color: white;
+        font-size: 14px;
+    }
 
 
 
@@ -306,14 +331,23 @@ if ($row = mysqli_fetch_assoc($result)) {
         </div>
     </div>
 
-<div class="post-message">
-    <h2>Post a Message</h2>
-    <div class="message-form">
-        <form action="postmessage.php" method="post">
-            <textarea name="message" rows="4" cols="50" placeholder="Type your message here"></textarea>
-            <button type="submit" class="post-message-button">Post Message</button>
-        </form>
+    <div class="Dept-messages">
+    <?php 
+                require_once("dbconnect.php");
+                $sql = "SELECT * FROM departmentmessages";
+                $result = mysqli_query($conn, $sql);
+                if(mysqli_num_rows($result) > 0){
+                    while($row = mysqli_fetch_array($result)){
+            ?>
+            <div class="departmentmessages">
+                <h3><?php echo $row[0]; ?></h3>
+                <p> Message: <?php echo $row[1]; ?></p>
+                
+            </div>
+            <?php 
+                    }                    
+                }
+            ?>
     </div>
-</div>
 </body>
 </html>
