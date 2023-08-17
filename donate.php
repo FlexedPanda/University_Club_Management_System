@@ -1,15 +1,15 @@
 <?php
       require_once("dbconnect.php"); // Assuming dbconnect.php contains database connection code
       
-      
+    $updateResult = FALSE; 
+    $updateTotalResult = FALSE;
     $eventID = $_GET['event_id'];
     $sponsorEmail = $_GET['email'];
     
         // Fetch event details based on event_id and update content here...
     $eventSql = "SELECT * FROM event WHERE event_id = $eventID";
     $eventResult = mysqli_query($conn, $eventSql);
-    
-    
+
     if (mysqli_num_rows($eventResult) > 0) {
         $eventRow = mysqli_fetch_assoc($eventResult);
         $eventName = $eventRow['name'];
@@ -23,14 +23,6 @@
         } else {
           echo "<p>No event found.</p>";
         }
-
-      $presidentSql = "SELECT email,contact_no FROM member where club_name = '$club_name" and designation = 'president';
-    $presidentResult = mysqli_query($conn, $presidentSql);
-
-    
-     $presidentRow = mysqli_fetch_assoc($presidentResult);
-     $presidentEmail = $presidentRow['email'];
-$presidentPhone = $presidentRow['contact_no'];
       
 
       if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -41,22 +33,45 @@ $presidentPhone = $presidentRow['contact_no'];
         $checkQuery = "SELECT * FROM funding_request WHERE sponsor_email = '$sponsorEmail' and event = '$eventName'";
         $checkResult = $conn->query($checkQuery);
 
+        $sql = "SELECT SUM(amount) AS total_amount FROM funding_request WHERE event = '$eventName'";
+          $result = mysqli_query($conn, $sql);
+          if(mysqli_num_rows($result) > 0){
+              while($row = mysqli_fetch_array($result))
+              $donation = $row[0];
+          }
+
         if ($checkResult->num_rows > 0) {
+          
+          if ($donation+$amount<=$eventCost){
             $updateQuery = "UPDATE funding_request 
                             SET amount = amount + $amount
-                            WHERE email = '$sponsorEmail' AND event = '$eventName'";
+                            WHERE Sponsor_email = '$sponsorEmail' AND event = '$eventName'";
             $updateResult = $conn->query($updateQuery);
-        }
-        else{
-            $insertQuery = "INSERT INTO funding_request (Sponsor_email, event, amount)
-                            VALUES ('$sponsorEmail', '$eventName', $amount)";
-            $updateResult = $conn->query($insertQuery);               
-            }
-        
-        $updateTotalFund = "UPDATE sponsor
+            $updateTotalFund = "UPDATE sponsor
                             SET funding = funding+$amount
                             WHERE email = '$sponsorEmail'";
         $updateTotalResult = $conn->query($updateTotalFund);
+          }
+          else{
+            echo 'Donation exceeds event cost. Please choose a lesser amount.';
+          }
+        }
+        else{
+          if ($donation + $amount<=$eventCost){
+            $insertQuery = "INSERT INTO funding_request (Sponsor_email, event, amount)
+                            VALUES ('$sponsorEmail', '$eventName', $amount)";
+            $updateResult = $conn->query($insertQuery); 
+            $updateTotalFund = "UPDATE sponsor
+                            SET funding = funding+$amount
+                            WHERE email = '$sponsorEmail'";
+        $updateTotalResult = $conn->query($updateTotalFund);
+          }
+          else{
+            echo 'Donation exceeds event cost. Please choose a lesser amount.';
+          }              
+            }
+        
+        
         if ($updateResult === TRUE && $updateTotalResult === TRUE) {
             echo "Donation recorded successfully.";
         }
@@ -64,15 +79,21 @@ $presidentPhone = $presidentRow['contact_no'];
                 echo "Error updating record: " . $conn->error;
             }
         }
-    $sql = "SELECT SUM(amount) AS total_amount FROM funding_request WHERE event = '$eventName'";
-    $result = mysqli_query($conn, $sql);
-    if(mysqli_num_rows($result) > 0){
-        while($row = mysqli_fetch_array($result))
-        $donation = $row[0];
-    }
+        $sql = "SELECT SUM(amount) AS total_amount FROM funding_request WHERE event = '$eventName'";
+        $result = mysqli_query($conn, $sql);
+        if(mysqli_num_rows($result) > 0){
+            while($row = mysqli_fetch_array($result))
+            $donation = $row[0];
+        }
     $ratio = $donation/$eventCost*100;
-    
 
+    $presiSql = "Select email,contact_no from member where designation= 'president' and club= '$clubName'";
+    $presiResult = mysqli_query($conn,$presiSql);
+    
+    $row = mysqli_fetch_array($presiResult);
+    $presiEmail = $row[0];
+    $presiContact = $row[1];
+    
 
     ?>
 
@@ -229,7 +250,7 @@ $presidentPhone = $presidentRow['contact_no'];
       <div>4000 BDT</div>
       <form method="post" action="">
     <input type="hidden" name="sponsor_level" value="Silver Sponsor">
-    <input type="hidden" name="amount" value="40000">
+    <input type="hidden" name="amount" value="4000">
     <div class="donate-button">
         <button type="submit">Donate</button>
     </div>
@@ -265,8 +286,8 @@ $presidentPhone = $presidentRow['contact_no'];
         </div>
       </div>
       <div class="contact-info">
-        <p>Contact: <?php echo $presidentEmail; ?></p>
-        <p>Phone: <?php echo $presidentPhone;?></p>
+        <p>Contact: <?php echo $presiEmail;?></p>
+        <p>Phone: <?php echo $presiContact;?></p>
       </div>
     </div>
   </div>
