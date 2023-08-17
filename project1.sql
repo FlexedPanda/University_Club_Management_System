@@ -137,6 +137,26 @@ INSERT INTO `event` (`event_id`, `name`, `cost`, `date`, `capacity`, `vanue`, `o
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `funding_request`
+--
+
+CREATE TABLE `funding_request` (
+  `Sponsor_email` varchar(40) NOT NULL,
+  `Event` varchar(40) NOT NULL,
+  `Amount` int(40) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `funding_request`
+--
+
+INSERT INTO `funding_request` (`Sponsor_email`, `Event`, `Amount`) VALUES
+('hasanul@xybank.org', 'Robo Carnival', 10000);
+
+-- --------------------------------------------------------
+
+
+--
 -- Table structure for table `has`
 --
 
@@ -212,7 +232,9 @@ INSERT INTO `member` (`student_id`, `name`, `designation`, `email`, `dob`, `depa
 (44, 'John Wick', 'executive', 'john@gmail.com', '2005-01-10', 'LLB', 'male', 'BUCC', 12345, 91911),
 (49, 'Riaz', 'general', 'riaz@gmail.com', '2000-03-05', 'EEE', 'male', 'BUCC', 12345, 1112220004),
 (50, 'Rasel', 'general', 'rasel@gmail.com', '2001-05-06', 'BBA', 'male', 'BUCC', 12345, 7535335),
-(51, 'Keka', 'general', 'keka@gmail.com', '1992-09-03', 'EEE', 'male', 'BUCC', 12345, 8938594);
+(51, 'Keka', 'general', 'keka@gmail.com', '1992-09-03', 'EEE', 'male', 'BUCC', 12345, 8938594),
+(99, 'Riazul Karim', 'president', 'riazul.karim@g.bracu.ac.bd', '2023-08-10', 'CSE', 'Male', 'robu', 12345, 01812345789),
+(98, 'Jon Snow The King In the North', 'president', 'jonsnow@beyondthewall.org', '2000-08-10', 'CSE', 'Male', 'BULDF', 12345, 01377434543);
 
 -- --------------------------------------------------------
 
@@ -267,8 +289,10 @@ INSERT INTO `participate` (`member_id`, `event_id`) VALUES
 --
 
 CREATE TABLE `sponsor` (
-  `contact_no` varchar(40) NOT NULL,
+  `Email` varchar(40) NOT NULL,
+  `Pin` int(11) NOT NULL,
   `name` varchar(40) NOT NULL,
+  `Designation` varchar(40) NOT NULL,
   `funding` int(11) NOT NULL,
   `advisor_account` int(11) NOT NULL,
   `oca_id` int(11) NOT NULL
@@ -278,8 +302,9 @@ CREATE TABLE `sponsor` (
 -- Dumping data for table `sponsor`
 --
 
-INSERT INTO `sponsor` (`contact_no`, `name`, `funding`, `advisor_account`, `oca_id`) VALUES
-('0178', 'XY Bank', 15000, 12345678, 1);
+INSERT INTO `sponsor` (`Email`, `Pin`, `name`, `Designation`, `funding`, `advisor_account`, `oca_id`) VALUES
+('hasanul@xybank.org', 12345, 'XY Bank', 'sponsor', 30000, 12345678, 1);
+
 
 --
 -- Indexes for dumped tables
@@ -308,7 +333,12 @@ ALTER TABLE `department`
 --
 ALTER TABLE `event`
   ADD PRIMARY KEY (`event_id`);
-
+--
+-- Indexes for table `funding_request`
+--
+ALTER TABLE `funding_request`
+  ADD PRIMARY KEY (`Event`,`Sponsor_email`),
+  ADD KEY `Test` (`Sponsor_email`);
 --
 -- Indexes for table `member`
 --
@@ -326,9 +356,14 @@ ALTER TABLE `participate`
 -- Indexes for table `sponsor`
 --
 ALTER TABLE `sponsor`
-  ADD PRIMARY KEY (`contact_no`),
+  ADD PRIMARY KEY (`Email`),
   ADD KEY `oca_id` (`oca_id`),
   ADD KEY `advisor_account` (`advisor_account`);
+--
+-- Constraints for table `funding_request`
+--
+ALTER TABLE `funding_request`
+  ADD CONSTRAINT `Test` FOREIGN KEY (`Sponsor_email`) REFERENCES `sponsor` (`Email`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
