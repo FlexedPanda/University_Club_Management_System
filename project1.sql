@@ -2,8 +2,8 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Aug 16, 2023 at 09:32 PM
+-- Host: 127.0.0.1
+-- Generation Time: Aug 17, 2023 at 05:42 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -47,6 +47,27 @@ INSERT INTO `advisor` (`email`, `name`, `pin`, `id`, `Bank_account`, `designatio
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `club`
+--
+
+CREATE TABLE `club` (
+  `name` varchar(50) NOT NULL,
+  `president` varchar(50) NOT NULL,
+  `established_date` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `club`
+--
+
+INSERT INTO `club` (`name`, `president`, `established_date`) VALUES
+('BUAC', 'MNO', '2023-08-02'),
+('BUCC', 'ABC', '2020-08-05'),
+('BUEDF', 'XYZ', '2018-08-29');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `department`
 --
 
@@ -63,7 +84,9 @@ CREATE TABLE `department` (
 --
 
 INSERT INTO `department` (`name`, `pin`, `head`, `email`, `designation`) VALUES
-('CSE', 12345, 'Sadia Kazi', 'cse@bracu.com', 'dept');
+('CSE', 12345, 'Sadia Kazi', 'cse@bracu.com', 'dept'),
+('MNS', 12345, 'Mostak Ahmed', 'mns@gmail.com', 'dept'),
+('PHY', 12345, 'Yousuf Hyder', 'phy@gmail.com', 'dept');
 
 -- --------------------------------------------------------
 
@@ -82,7 +105,8 @@ CREATE TABLE `departmentmessages` (
 
 INSERT INTO `departmentmessages` (`departmentname`, `message`) VALUES
 ('CSE', 'This is a test message from CSE dept'),
-('Pharmacy', 'We have a session in the next week');
+('Pharmacy', 'We have a session in the next week'),
+('CSE', 'Sample Message By Panda');
 
 -- --------------------------------------------------------
 
@@ -134,7 +158,8 @@ INSERT INTO `has` (`member_id`, `club_name`) VALUES
 (44, 'BUCC'),
 (49, 'BUCC'),
 (50, 'BUCC'),
-(51, 'BUCC');
+(51, 'BUCC'),
+(17, 'BUCC');
 
 -- --------------------------------------------------------
 
@@ -179,14 +204,15 @@ CREATE TABLE `member` (
 --
 
 INSERT INTO `member` (`student_id`, `name`, `designation`, `email`, `dob`, `department`, `gender`, `club`, `pin`, `contact_no`) VALUES
-(11, 'Abira', 'executive', 'abira@gmail.com', '2023-08-01', 'cse', 'female', 'BUCC', 12345, 1994225023),
-(12, 'Panda', 'executive', 'boysir7@gmail.com', '0000-00-00', 'eee', 'male', 'bucc', 12345, 12222),
-(18, 'Panda', 'member', 'panda@gmail.com', '2000-07-12', 'cse', 'male', 'BUCC', 12345, 12345),
-(21, 'Vader', 'president', 'president@gmail.com', '2015-08-05', 'cse', 'male', 'BUCC', 12345, 1994225024),
-(44, 'John Wick', 'executive', 'john@gmail.com', '2005-01-10', 'llb', 'male', 'BUCC', 12345, 91911),
-(49, 'Riaz', 'general', 'riaz@gmail.com', '2000-03-05', 'eee', 'male', 'BUCC', 12345, 1112220004),
-(50, 'Rasel', 'general', 'rasel@gmail.com', '2001-05-06', 'bba', 'male', 'BUCC', 12345, 7535335),
-(51, 'Keka', 'general', 'keka@gmail.com', '1992-09-03', 'eee', 'male', 'BUCC', 12345, 8938594);
+(11, 'Abira', 'executive', 'abira@gmail.com', '2023-08-01', 'EEE', 'female', 'BUCC', 12345, 1994225023),
+(12, 'Panda', 'executive', 'boysir7@gmail.com', '2000-07-12', 'EEE', 'male', 'bucc', 12345, 12222),
+(17, 'FlexedPanda', 'executive', 'flexed@gmail.com', '2000-04-19', 'CSE', 'male', 'BUCC', 12345, 1987634),
+(18, 'Panda', 'member', 'panda@gmail.com', '2000-07-12', 'CSE', 'male', 'BUCC', 12345, 12345),
+(21, 'Vader', 'president', 'president@gmail.com', '2015-08-05', 'CSE', 'male', 'BUCC', 12345, 1994225024),
+(44, 'John Wick', 'executive', 'john@gmail.com', '2005-01-10', 'LLB', 'male', 'BUCC', 12345, 91911),
+(49, 'Riaz', 'general', 'riaz@gmail.com', '2000-03-05', 'EEE', 'male', 'BUCC', 12345, 1112220004),
+(50, 'Rasel', 'general', 'rasel@gmail.com', '2001-05-06', 'BBA', 'male', 'BUCC', 12345, 7535335),
+(51, 'Keka', 'general', 'keka@gmail.com', '1992-09-03', 'EEE', 'male', 'BUCC', 12345, 8938594);
 
 -- --------------------------------------------------------
 
@@ -228,6 +254,8 @@ CREATE TABLE `participate` (
 INSERT INTO `participate` (`member_id`, `event_id`) VALUES
 (2, 1),
 (2, 3),
+(12, 1),
+(12, 3),
 (21, 1),
 (21, 3),
 (44, 1);
@@ -262,6 +290,18 @@ INSERT INTO `sponsor` (`contact_no`, `name`, `funding`, `advisor_account`, `oca_
 --
 ALTER TABLE `advisor`
   ADD PRIMARY KEY (`Bank_account`);
+
+--
+-- Indexes for table `club`
+--
+ALTER TABLE `club`
+  ADD PRIMARY KEY (`name`);
+
+--
+-- Indexes for table `department`
+--
+ALTER TABLE `department`
+  ADD PRIMARY KEY (`name`);
 
 --
 -- Indexes for table `event`
