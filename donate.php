@@ -8,7 +8,8 @@
         // Fetch event details based on event_id and update content here...
     $eventSql = "SELECT * FROM event WHERE event_id = $eventID";
     $eventResult = mysqli_query($conn, $eventSql);
-
+    
+    
     if (mysqli_num_rows($eventResult) > 0) {
         $eventRow = mysqli_fetch_assoc($eventResult);
         $eventName = $eventRow['name'];
@@ -22,6 +23,14 @@
         } else {
           echo "<p>No event found.</p>";
         }
+
+      $presidentSql = "SELECT email,contact_no FROM member where club_name = '$club_name" and designation = 'president';
+    $presidentResult = mysqli_query($conn, $presidentSql);
+
+    
+     $presidentRow = mysqli_fetch_assoc($presidentResult);
+     $presidentEmail = $presidentRow['email'];
+$presidentPhone = $presidentRow['contact_no'];
       
 
       if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -62,7 +71,7 @@
         $donation = $row[0];
     }
     $ratio = $donation/$eventCost*100;
-
+    
 
 
     ?>
@@ -256,8 +265,8 @@
         </div>
       </div>
       <div class="contact-info">
-        <p>Contact: sponsor@university.edu</p>
-        <p>Phone: (123) 456-7890</p>
+        <p>Contact: <?php echo $presidentEmail; ?></p>
+        <p>Phone: <?php echo $presidentPhone;?></p>
       </div>
     </div>
   </div>
