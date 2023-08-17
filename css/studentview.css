@@ -1,0 +1,116 @@
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    text-align: center;
+    border-bottom: 2px solid #4169E1;
+    background-color: #4169E1;
+    padding: 05px;
+    width: 15%;
+    box-sizing: border-box;
+    z-index: 100;
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    margin: 0 5px;
+}
+
+.navbar a:hover {
+    color: #aaa;
+}
+
+.club-info {
+    text-align: center;
+    padding: 50px;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.club-logo {
+    width: 100px;
+}
+
+.club-name {
+    color: white;
+    font-size: 24px;
+    margin-top: 10px;
+}
+
+.events-section {
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.ongoing-events-dev {
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 20px;
+    color: white;
+}
+
+.event {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #4169E1;
+}
+
+.join-event {
+    background-color: #F8F9FA;
+    color: #4169E1;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+.panel-messages {
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+}
+
+.Dept-messages {
+padding: 20px;
+background-color: rgba(0, 0, 0, 0.7);
+color: white;
+font-family: Arial, sans-serif;
+margin-top: 20px;
+}
+
+.departmentmessages {
+border: 1px solid #ccc;
+padding: 10px;
+margin-bottom: 10px;
+background-color: rgba(0, 0, 0, 0.5);
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+font-weight: bold;
+}
+
+.departmentmessages h3 {
+color: #4169E1;
+font-size: 18px;
+}
+
+.departmentmessages p {
+color: white;
+font-size: 14px;
+}
+
+.section-heading {
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    padding: 5px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    margin-bottom: 10px;
+}

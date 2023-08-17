@@ -7,14 +7,14 @@
     <link rel="stylesheet" type="text/css" href="css/login.css">
 
 </head>
-<body background='img/bracubackground.jpg'>
+<body background="img/bracubackground.jpg">
 	<div class="body-content">
 		<div class="module">
 			<form name="fm" name ="myForm" action="signin.php" method="POST">
 			<h2>BRAC University <br> Club Management System</h2>
 			<center><img src="img/bracu_logo.png"></center>
 
-			<div class="sgn">Sign in with Student ID and Password</div>
+			<div class="sgn">Sign In with User Type <br> Designation, Email & Password</div>
             <br>
 
             <label for="userType">User Type:</label>

@@ -1,4 +1,6 @@
 <?php
+session_start();
+$_Session['mssg'] = null;
 require_once('dbconnect.php');
 
 if(isset($_POST['userType']) && isset($_POST['designation'])&& isset($_POST['email'])&& isset($_POST['pin'])){
@@ -38,10 +40,20 @@ if(isset($_POST['userType']) && isset($_POST['designation'])&& isset($_POST['ema
 	}
 
 	else{
-		echo "Username or Password is wrong";
-		header("Location: login.php");
+		echo '
+		<head>
+			<title>Error</title>
+			<link rel="stylesheet" type="text/css" href="css/error.css">
+		</head>
+		<body background="img/bracubackground.jpg">
+			<div class="center-div">
+				<h1>Wrong Credentials<i></i></h1>
+				<p>Enter proper User Type, Designation, Email & Password For Signing In.</p>
+				<a href="login.php"><button class="btn">Go Back To Sign In Page<i></i></button></a>
+			</div>
+		</body>
+		';
 	}
 
 }
-
 ?>

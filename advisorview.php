@@ -4,12 +4,12 @@ require_once("dbconnect.php");
 if(isset($_POST['accept_request'])) {
     $sponsorID = $_POST['sponsorID'];
     $amount = $_POST['amount'];
-    
+
     $sql = "SELECT * FROM advisor";
     $result = mysqli_query($conn, $sql);
     if(mysqli_num_rows($result) > 0){
         while($row = mysqli_fetch_array($result))
-            
+
 
     // Update the advisor's balance
     $updateQuery = "UPDATE advisor SET balance = balance + $amount WHERE id = $row[3]"; 
@@ -96,7 +96,6 @@ if(isset($_POST['provide_fund'])) {
                     }
                 }
             }
-            
             echo "Successfully provided funding for the event.";
         } else {
             echo "Error providing funding: " . mysqli_error($conn);
@@ -112,77 +111,65 @@ if(isset($_POST['provide_fund'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home Page</title>
-    <style>
-        body  {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-image: url('img/bracubackground.jpg'); /* Replace with the path to your background image */
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-        }
+    <link rel="stylesheet" type="text/css" href="css/advisorview.css">
 
-        .navbar {
-            position: fixed;
-            top: 0;
-            right: 0;
-            text-align: right;
-            border-bottom: 2px solid #007BFF; 
-            background-color: #007BFF; /* Perfect Blue background */
-            padding: 10px;
-            width: 5%; /* Adjust the width as needed */
-            box-sizing: border-box;
-            z-index: 100;
-        }
-
-        .navbar a {
-            color: white;
-            text-decoration: none;
-            margin: 0 10px;
-        }
-
-        .advisor-info {
-            text-align: center;
-            padding: 40px;
-            background-color: rgba(0, 0, 0, 0.5);
-        }
-
-        .club-logo {
-            width: 100px; /* Adjust the width as needed */
-        }
-
-  
-        .upcoming-events-dev {
-            background-color: rgba(0, 0, 0, 0.5);
-            padding: 20px;
-            color: white;
-        }
-
-        .advisor-details-dev {
-            background-color: rgba(0, 0, 0, 0.5);
-            padding: 20px;
-            color: white;
-        }
-
-        .event {
-            border: 1px solid #ccc;
-            padding: 10px;
-            margin-bottom: 10px;
-            background-color: #007BFF; /* Blue background */
-        }
-
-
-    </style>
 </head>
-<body>
+<body background="img/bracubackground.jpg">
     <div class="navbar">
-        <a href="logout.php">Logout</a>
+        <a href='department_list.php'>Department</a>
+        <a href='club_list.php'>Club</a>
+        <a href="logout.php">Log out</a>
     </div>
-    
+
     <div class="advisor-info">
         <img src="img/bracu_logo.png" alt="Club Logo" class="club-logo">
         <h1 class="advisor"><?php echo 'Advisor View'; ?></h1>
+    </div>
+
+    <div class="Dept-messages">
+    <h2 class="section-heading">Announcements</h2>
+    <?php 
+                require_once("dbconnect.php");
+                $sql = "SELECT * FROM departmentmessages";
+                $result = mysqli_query($conn, $sql);
+                if(mysqli_num_rows($result) > 0){
+                    while($row = mysqli_fetch_array($result)){
+            ?>
+            <div class="departmentmessages">
+                <h3><?php echo $row[0]; ?></h3>
+                <p> Message: <?php echo $row[1]; ?></p>
+            </div>
+            <?php 
+                    }
+                }
+            ?>
+    </div>
+
+    <div class="advisor-details">
+        <h2 class = 'section-heading'>Advisor Details</h2>
+        <div class="advisor-details-dev">
+            <?php 
+                require_once("dbconnect.php");
+                $sql = "SELECT * FROM advisor";
+                $result = mysqli_query($conn, $sql);
+                if(mysqli_num_rows($result) > 0){
+                    while($row = mysqli_fetch_array($result)){
+            ?>
+            <div class="advisor">
+                <h3> Name: <?php echo $row[1]; ?></h3>
+                <p> ID: <?php echo $row[3]; ?></p>
+                <p> Bank Account Mumber: <?php echo $row[4]; ?></p>
+                <p> Balance: <?php echo $row[6]; ?></p>
+                <form action="" method="post">
+        <button class="withdraw-balance" name="withdraw_balance">Withdraw All Funds</button>
+    </form> 
+
+            </div>
+            <?php 
+                    }
+                }
+            ?>
+        </div>
     </div>
 
     <div class="events-section">
@@ -202,7 +189,7 @@ if(isset($_POST['provide_fund'])) {
 
             </div>
             <?php 
-                    }                    
+                    }
                 }
             ?>
         </div>
@@ -229,100 +216,12 @@ if(isset($_POST['provide_fund'])) {
     </form>
 </div>
             <?php 
-                    }                    
+                    }
                 }
             ?>
   
     </div>
 </div>
-    <div class="advisor-details">
-        <h2 class = 'section-heading'>Advisor Details</h2>
-        <div class="advisor-details-dev">
-            <?php 
-                require_once("dbconnect.php");
-                $sql = "SELECT * FROM advisor";
-                $result = mysqli_query($conn, $sql);
-                if(mysqli_num_rows($result) > 0){
-                    while($row = mysqli_fetch_array($result)){
-            ?>
-            <div class="advisor">
-                <h3> Name: <?php echo $row[1]; ?></h3>
-                <p> ID: <?php echo $row[3]; ?></p>
-                <p> Bank Account Mumber: <?php echo $row[4]; ?></p>
-                <p> Balance: <?php echo $row[6]; ?></p>
-                <form action="" method="post">
-        <button class="withdraw-balance" name="withdraw_balance">Withdraw All Funds</button>
-    </form> 
-
-            </div>
-            <?php 
-                    }                    
-                }
-            ?>
-        </div>
-    </div>
-
-<style>
-    .section-heading {
-        border: 1px solid rgba(0, 0, 0, 0.5);
-        padding: 5px;
-        background-color: rgba(0, 0, 0, 0.5);
-        color: white;
-        margin-bottom: 10px;
-    }
-
-    .incoming-requests {
-        background-color: rgba(0, 0, 0, 0.7); /* Transparent black background */
-        padding: 20px;
-        color: white;
-    }
-
-    .request {
-        border: 1px solid rgba(0, 0, 0, 0.5); /* Transparent black border */
-        padding: 10px;
-        margin-bottom: 10px;
-        background-color: #007BFF; /* Blue background */
-    }
-
-    .accept-request,
-    .reject-request {
-        background-color: #F8F9FA; /* Off-white */
-        color: #007BFF; /* Perfect Blue text color */
-        border: none;
-        padding: 5px 10px;
-        cursor: pointer;
-        border-radius: 3px;
-        margin-right: 5px;
-    }
-
-
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        th, td {
-            /* Add styles for table cells */
-            border: 1px solid rgba(0, 0, 0, 0.5); /* Transparent black border */
-            padding: 10px;
-            background-color: #007BFF; /* Blue background */
-            color: white;
-        }
-
-        th {
-            /* Add styles for table header cells */
-            background-color: rgba(0, 0, 0, 0.5); /* Transparent black background */
-            color: white;
-        }
-
-
-
-
-
-</style>
-
-
 
 <div class="search-event">
         <h2 class="section-heading">Event Details:</h2>
@@ -338,7 +237,7 @@ if(isset($_POST['provide_fund'])) {
         <th>Club name</th>
         <th>Cost</th>
         <th>Money Received</th>
-        <th>Provide fund</th> <!-- New column header -->
+        <th>Provide fund</th>
     </tr>
     <?php 
     require_once("dbconnect.php");
@@ -372,14 +271,7 @@ if(isset($_POST['provide_fund'])) {
 </table>
         </div>
     </div>
-<div class="pb-4 pt-3 text-center text-L text-white-600 dark: text-white-300 md: px-[60px] md:pb-6 md:pt-3"> <span>
-University Club Management System
-</span>
-</div>
+
 </div>
 </body>
 </html>
-
-
-
-

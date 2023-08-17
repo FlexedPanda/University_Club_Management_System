@@ -22,5 +22,17 @@ $reslt2 = mysqli_query($conn, $sql2);
 $sql3 = "DELETE FROM incoming_request WHERE student_id = '$stdid' ";
 $reslt3 = mysqli_query($conn, $sql3);
 
-echo 'Go back, successfully added';
+echo '
+    <head>
+        <title>Accepted</title>
+        <link rel="stylesheet" type="text/css" href="css/error.css">
+    </head>
+    <body background="img/bracubackground.jpg">
+        <div class="center-div">
+            <h1>Member Accepted<i></i></h1>
+            <p>The Member Request Has Been Successfully Accepted.</p>
+            <button class="btn" onclick="history.go(-1);" >Go Back To Homepage<i></i></button>
+        </div>
+    </body>
+    ';
 ?>

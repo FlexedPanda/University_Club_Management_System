@@ -2,23 +2,29 @@
 require_once('dbconnect.php');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Retrieve the department name from the form
     $departmentName= $_GET['dept_name'];
-
-    
-    // Retrieve the posted message
     $message = $_POST['message'];
 
-    // Update the departmentmessages table in the database
-    require_once('dbconnect.php'); // Include your database connection script
+
+    require_once('dbconnect.php');
     $insertSql = "INSERT INTO departmentmessages (departmentname, message) VALUES ('$departmentName', '$message')";
-    
+
     if (mysqli_query($conn, $insertSql)) {
-        // Database update successful
         mysqli_close($conn);
-        
-        echo 'Message posted successfully';
-        // Redirect back to home.php or wherever you want
+
+        echo '
+        <head>
+            <title>Posted</title>
+            <link rel="stylesheet" type="text/css" href="css/error.css">
+        </head>
+        <body background="img/bracubackground.jpg">
+            <div class="center-div">
+                <h1>Message Posted<i></i></h1>
+                <p>Message Have Been Successfully Posted & Sent To All Users.</p>
+                <button class="btn" onclick="history.go(-1);" >Go Back To Homepage<i></i></button>
+            </div>
+        </body>
+        ';
         // header("Location: home.php");
         exit();
     } else {
@@ -27,4 +33,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 ?>
-

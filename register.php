@@ -6,7 +6,7 @@
 	<link rel="stylesheet" type="text/css" href="css/register.css">
 
 </head>
-<body background='img/bracubackground.jpg'>
+<body background="img/bracubackground.jpg">
 	<div class="body-content">
 		<div class="module">
 			<h1><center>Create Account</center></h1>
@@ -18,10 +18,10 @@
 
 				<select name="department" id="department">
 					<option value="">Select Department</option selected>
-					<option value="cse">CSE</option>
-					<option value="eee">EEE</option>
-					<option value="bba">BBA</option>
-					<option value="llb">LLB</option>
+					<option value="CSE">CSE</option>
+					<option value="EEE">EEE</option>
+					<option value="BBA">BBA</option>
+					<option value="LLB">LLB</option>
 				</select required>
 
 				<select id="club" name="club">

@@ -1,7 +1,5 @@
 <?php
-// Include your database connection code here (dbconnect.php or similar)
 
-// Retrieve the member details from the URL parameters
 $student_id = $_GET['student_id'];
 $name = $_GET['name'];
 $designation = $_GET['designation'];
@@ -12,9 +10,8 @@ $gender = $_GET['gender'];
 $pin = $_GET['pin'];
 $contact_no = $_GET['contact_no'];
 
-// Check if the form has been submitted for updating member details
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Retrieve updated member details from the form
     $updatedName = $_POST['name'];
     $updatedDesignation = $_POST['designation'];
     $updatedEmail = $_POST['email'];
@@ -24,20 +21,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $updatedPin = $_POST['pin'];
     $updatedContactNo = $_POST['contact_no'];
 
-    // Update the member details in the database
-    require_once('dbconnect.php'); // Include your database connection script
+
+    require_once('dbconnect.php');
     $updateSql = "UPDATE member SET name='$updatedName', designation='$updatedDesignation', email='$updatedEmail', dob='$updatedDob', department='$updatedDepartment', gender='$updatedGender', pin='$updatedPin', contact_no='$updatedContactNo' WHERE student_id=$student_id";
-    
+
     if (mysqli_query($conn, $updateSql)) {
-        // Database update successful
         mysqli_close($conn);
-        
-        echo 'Go back, successfully updated';
+
+        echo '
+		<head>
+			<title>Updated</title>
+			<link rel="stylesheet" type="text/css" href="css/error.css">
+		</head>
+		<body background="img/bracubackground.jpg">
+			<div class="center-div">
+				<h1>Member Updated<i></i></h1>
+				<p>The Existing Record For The Member Is Successfully Updated.</p>
+				<button class="btn" onclick="history.go(-2);" >Go Back To Homepage<i></i></button>
+			</div>
+		</body>
+        ';
         //header("Location: home.php");
         exit();
     } else {
-        // Database update failed
-        echo "Error updating record: " . mysqli_error($conn);
+        echo 'Error updating record: ' . mysqli_error($conn);
     }
 }
 ?>
@@ -48,38 +55,38 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Member</title>
-    <style>
-        /* Your styles here */
-    </style>
+    <link rel="stylesheet" type="text/css" href="css/edit_member.css">
 </head>
-<body>
-    <h2>Edit Member Details</h2>
-    <form action="edit_member.php?student_id=<?php echo $student_id; ?>&name=<?php echo $name; ?>&designation=<?php echo $designation; ?>&email=<?php echo $email; ?>&dob=<?php echo $dob; ?>&department=<?php echo $department; ?>&gender=<?php echo $gender; ?>&pin=<?php echo $pin; ?>&contact_no=<?php echo $contact_no; ?>" method="post">
-        <label for="name">Name:</label>
-        <input type="text" name="name" value="<?php echo $name; ?>"><br>
+<body background="img/bracubackground.jpg">
+    <div class="module">
+        <h1>Edit Member Details</h1> <br>
+        <form action="edit_member.php?student_id=<?php echo $student_id; ?>&name=<?php echo $name; ?>&designation=<?php echo $designation; ?>&email=<?php echo $email; ?>&dob=<?php echo $dob; ?>&department=<?php echo $department; ?>&gender=<?php echo $gender; ?>&pin=<?php echo $pin; ?>&contact_no=<?php echo $contact_no; ?>" method="post">
+            <label for="name">Name:</label>
+            <input type="text" name="name" value="<?php echo $name; ?>"><br>
 
-        <label for="designation">Designation:</label>
-        <input type="text" name="designation" value="<?php echo $designation; ?>"><br>
+            <label for="designation">Designation:</label>
+            <input type="text" name="designation" value="<?php echo $designation; ?>"><br>
 
-        <label for="email">Email:</label>
-        <input type="email" name="email" value="<?php echo $email; ?>"><br>
+            <label for="email">Email:</label>
+            <input type="email" name="email" value="<?php echo $email; ?>"><br>
 
-        <label for="dob">Date of Birth:</label>
-        <input type="date" name="dob" value="<?php echo $dob; ?>"><br>
+            <label for="dob">Date of Birth:</label>
+            <input type="date" name="dob" value="<?php echo $dob; ?>"><br><br>
 
-        <label for="department">Department:</label>
-        <input type="text" name="department" value="<?php echo $department; ?>"><br>
+            <label for="department">Department:</label>
+            <input type="text" name="department" value="<?php echo $department; ?>"><br>
 
-        <label for="gender">Gender:</label>
-        <input type="text" name="gender" value="<?php echo $gender; ?>"><br>
+            <label for="gender">Gender:</label>
+            <input type="text" name="gender" value="<?php echo $gender; ?>"><br>
 
-        <label for="pin">PIN:</label>
-        <input type="text" name="pin" value="<?php echo $pin; ?>"><br>
+            <label for="pin">PIN:</label>
+            <input type="text" name="pin" value="<?php echo $pin; ?>"><br>
 
-        <label for="contact_no">Contact No:</label>
-        <input type="text" name="contact_no" value="<?php echo $contact_no; ?>"><br>
+            <label for="contact_no">Contact No:</label>
+            <input type="text" name="contact_no" value="<?php echo $contact_no; ?>"><br>
 
-        <button type="submit">Update</button>
-    </form>
+            <button type="submit">Update</button>
+        </form>
+    </div>
 </body>
 </html>
