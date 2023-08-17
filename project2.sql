@@ -2,8 +2,8 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Aug 17, 2023 at 05:42 AM
+-- Host: localhost
+-- Generation Time: Aug 17, 2023 at 10:46 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `project1`
+-- Database: `project2`
 --
 
 -- --------------------------------------------------------
@@ -42,7 +42,7 @@ CREATE TABLE `advisor` (
 --
 
 INSERT INTO `advisor` (`email`, `name`, `pin`, `id`, `Bank_account`, `designation`, `balance`) VALUES
-('Kazi@gmail.com', 'Kazi Ahmed', 12345, 1, 12345678, 'advisor', 0);
+('Kazi@gmail.com', 'Kazi Ahmed', 12345, 1, 12345678, 'advisor', 7000);
 
 -- --------------------------------------------------------
 
@@ -131,8 +131,27 @@ CREATE TABLE `event` (
 --
 
 INSERT INTO `event` (`event_id`, `name`, `cost`, `date`, `capacity`, `vanue`, `oca_id`, `club_name`, `money_received`) VALUES
-(1, 'Robo Carnival', 10000, '2023-08-22', 1000, 'UB2', 2, 'robu', 0),
+(1, 'Robo Carnival', 10000, '2023-08-22', 1000, 'UB2', 2, 'robu', 3000),
 (3, 'Lets Dance', 5000, '2023-08-15', 200, 'UB3', 2, 'BULDF', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `funding_request`
+--
+
+CREATE TABLE `funding_request` (
+  `Sponsor_email` varchar(40) NOT NULL,
+  `Event` varchar(40) NOT NULL,
+  `Amount` int(40) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `funding_request`
+--
+
+INSERT INTO `funding_request` (`Sponsor_email`, `Event`, `Amount`) VALUES
+('hasanul@xybank.org', 'Robo Carnival', 10000);
 
 -- --------------------------------------------------------
 
@@ -267,19 +286,21 @@ INSERT INTO `participate` (`member_id`, `event_id`) VALUES
 --
 
 CREATE TABLE `sponsor` (
-  `contact_no` varchar(40) NOT NULL,
+  `email` varchar(40) NOT NULL,
   `name` varchar(40) NOT NULL,
+  `pin` int(11) NOT NULL,
   `funding` int(11) NOT NULL,
   `advisor_account` int(11) NOT NULL,
-  `oca_id` int(11) NOT NULL
+  `oca_id` int(11) NOT NULL,
+  `Designation` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `sponsor`
 --
 
-INSERT INTO `sponsor` (`contact_no`, `name`, `funding`, `advisor_account`, `oca_id`) VALUES
-('0178', 'XY Bank', 15000, 12345678, 1);
+INSERT INTO `sponsor` (`email`, `name`, `pin`, `funding`, `advisor_account`, `oca_id`, `Designation`) VALUES
+('hasanul@xybank.org', 'XY Bank', 12345, 10000, 12345678, 1, 'sponsor');
 
 --
 -- Indexes for dumped tables
@@ -310,6 +331,12 @@ ALTER TABLE `event`
   ADD PRIMARY KEY (`event_id`);
 
 --
+-- Indexes for table `funding_request`
+--
+ALTER TABLE `funding_request`
+  ADD PRIMARY KEY (`Sponsor_email`,`Event`);
+
+--
 -- Indexes for table `member`
 --
 ALTER TABLE `member`
@@ -326,9 +353,19 @@ ALTER TABLE `participate`
 -- Indexes for table `sponsor`
 --
 ALTER TABLE `sponsor`
-  ADD PRIMARY KEY (`contact_no`),
+  ADD PRIMARY KEY (`email`),
   ADD KEY `oca_id` (`oca_id`),
   ADD KEY `advisor_account` (`advisor_account`);
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `funding_request`
+--
+ALTER TABLE `funding_request`
+  ADD CONSTRAINT `funding_request_ibfk_1` FOREIGN KEY (`Sponsor_email`) REFERENCES `sponsor` (`email`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
