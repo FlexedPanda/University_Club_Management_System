@@ -199,14 +199,16 @@ if(isset($_POST['provide_fund'])) {
     <h2 class="section-heading">Incoming Funding </h2>
     <div class="incoming-requests">
     <?php 
-                require_once("dbconnect.php");
-                $sql = "SELECT * FROM sponsor";
-                $result = mysqli_query($conn, $sql);
+            require_once("dbconnect.php");
+            $sql = "SELECT f.sponsor_email, f.event, f.amount, s.name FROM funding_request as f
+                        INNER JOIN sponsor as s where f.Sponsor_email = s.email ";
+            $result = mysqli_query($conn, $sql);
                 if(mysqli_num_rows($result) > 0){
                     while($row = mysqli_fetch_array($result)){
             ?>
                 <div class="request">
-    <p>Sponsor: <?php echo $row[1]; ?></p>
+    <p>Sponsor: <?php echo $row[3]; ?></p>
+    <p>Event Name: <?php echo $row[1]; ?></p>
     <p>Amount: <?php echo $row[2]; ?></p>
     <form action="" method="post">
         <input type="hidden" name="sponsorID" value="<?php echo $row[0]; ?>">

@@ -24,6 +24,7 @@
                 <option value="advisor">Advisor</option>
                 <option value="department">Department</option>
                 <option value="oca">OCA Admin</option>
+				<option value="sponsor">Sponsor</option>
             </select>
 
 			<input type="text" name="designation" id ="designation" placeholder="Designation" required>
