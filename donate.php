@@ -104,6 +104,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sponsor View</title>
+</head>
 <style>
   body {
     font-family: Arial, sans-serif;
@@ -203,7 +204,7 @@
     color: white;
   }
 </style>
-</head>
+
 <body>
   <header>
     <h1>University Management Platform</h1>

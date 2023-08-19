@@ -171,6 +171,26 @@ if ($row = mysqli_fetch_assoc($result)) {
             </table>
         </div>
     </div>
+    <div class="request-section">
+    <h2>Request for an Event</h2>
+    <form action="event_request.php" method="get">
+        <label for="student_id">Student ID:</label>
+        <input type="text" name="event_id" required><br>
+        <label for="student_id">Name of event:</label>
+        <input type="text" name="event_name" required><br>
+        <label for="student_id">Event Cost:</label>
+        <input type="text" name="event_cost" required><br>
+        <label for="student_id">Event Date:</label>
+        <input type="text" name="event_date" required><br>
+        <label for="student_id">Capicity:</label>
+        <input type="text" name="capicity" required><br>
+        <label for="student_id">Vanue:</label>
+        <input type="text" name="vanue" required><br>
+        <label for="student_id">Club name:</label>
+        <input type="text" name="club_name" required><br>
+        <button type="submit">Request Event</button>
+    </form>
+</div>
 
 </body>
 </html>

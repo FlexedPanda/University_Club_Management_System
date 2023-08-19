@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 17, 2023 at 05:42 AM
+-- Generation Time: Aug 19, 2023 at 10:53 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -42,7 +42,7 @@ CREATE TABLE `advisor` (
 --
 
 INSERT INTO `advisor` (`email`, `name`, `pin`, `id`, `Bank_account`, `designation`, `balance`) VALUES
-('Kazi@gmail.com', 'Kazi Ahmed', 12345, 1, 12345678, 'advisor', 0);
+('Kazi@gmail.com', 'Kazi Ahmed', 12345, 1, 12345678, 'advisor', 73800);
 
 -- --------------------------------------------------------
 
@@ -131,8 +131,8 @@ CREATE TABLE `event` (
 --
 
 INSERT INTO `event` (`event_id`, `name`, `cost`, `date`, `capacity`, `vanue`, `oca_id`, `club_name`, `money_received`) VALUES
-(1, 'Robo Carnival', 10000, '2023-08-22', 1000, 'UB2', 2, 'robu', 0),
-(3, 'Lets Dance', 5000, '2023-08-15', 200, 'UB3', 2, 'BULDF', 0);
+(1, 'Robo Carnival', 10000, '2023-08-22', 1000, 'UB2', 2, 'robu', 200),
+(3, 'Lets Dance', 5000, '2023-08-15', 200, 'UB3', 2, 'BULDF', 4000);
 
 -- --------------------------------------------------------
 
@@ -151,10 +151,10 @@ CREATE TABLE `funding_request` (
 --
 
 INSERT INTO `funding_request` (`Sponsor_email`, `Event`, `Amount`) VALUES
+('hasanul@xybank.org', 'Lets Dance', 4000),
 ('hasanul@xybank.org', 'Robo Carnival', 10000);
 
 -- --------------------------------------------------------
-
 
 --
 -- Table structure for table `has`
@@ -180,6 +180,29 @@ INSERT INTO `has` (`member_id`, `club_name`) VALUES
 (50, 'BUCC'),
 (51, 'BUCC'),
 (17, 'BUCC');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `incoming_event`
+--
+
+CREATE TABLE `incoming_event` (
+  `event_id` int(100) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `cost` int(100) NOT NULL,
+  `date` date NOT NULL,
+  `capacity` int(100) NOT NULL,
+  `vanue` varchar(100) NOT NULL,
+  `club_name` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `incoming_event`
+--
+
+INSERT INTO `incoming_event` (`event_id`, `name`, `cost`, `date`, `capacity`, `vanue`, `club_name`) VALUES
+(4, 'BRAC CSE Job Fest', 20000, '2023-08-25', 1000, 'UB2', 'BUCC');
 
 -- --------------------------------------------------------
 
@@ -230,11 +253,11 @@ INSERT INTO `member` (`student_id`, `name`, `designation`, `email`, `dob`, `depa
 (18, 'Panda', 'member', 'panda@gmail.com', '2000-07-12', 'CSE', 'male', 'BUCC', 12345, 12345),
 (21, 'Vader', 'president', 'president@gmail.com', '2015-08-05', 'CSE', 'male', 'BUCC', 12345, 1994225024),
 (44, 'John Wick', 'executive', 'john@gmail.com', '2005-01-10', 'LLB', 'male', 'BUCC', 12345, 91911),
-(49, 'Riaz', 'general', 'riaz@gmail.com', '2000-03-05', 'EEE', 'male', 'BUCC', 12345, 1112220004),
+(49, 'Riaz boi', 'general', 'riaz@gmail.com', '2000-03-05', 'EEE', 'male', 'BUCC', 12345, 1112220004),
 (50, 'Rasel', 'general', 'rasel@gmail.com', '2001-05-06', 'BBA', 'male', 'BUCC', 12345, 7535335),
 (51, 'Keka', 'general', 'keka@gmail.com', '1992-09-03', 'EEE', 'male', 'BUCC', 12345, 8938594),
-(99, 'Riazul Karim', 'president', 'riazul.karim@g.bracu.ac.bd', '2023-08-10', 'CSE', 'Male', 'robu', 12345, 01812345789),
-(98, 'Jon Snow The King In the North', 'president', 'jonsnow@beyondthewall.org', '2000-08-10', 'CSE', 'Male', 'BULDF', 12345, 01377434543);
+(98, 'Jon Snow The King In the North', 'president', 'jonsnow@beyondthewall.org', '2000-08-10', 'CSE', 'Male', 'BULDF', 12345, 1377434543),
+(99, 'Riazul Karim', 'president', 'riazul.karim@g.bracu.ac.bd', '2023-08-10', 'CSE', 'Male', 'robu', 12345, 1812345789);
 
 -- --------------------------------------------------------
 
@@ -303,8 +326,7 @@ CREATE TABLE `sponsor` (
 --
 
 INSERT INTO `sponsor` (`Email`, `Pin`, `name`, `Designation`, `funding`, `advisor_account`, `oca_id`) VALUES
-('hasanul@xybank.org', 12345, 'XY Bank', 'sponsor', 30000, 12345678, 1);
-
+('hasanul@xybank.org', 12345, 'XY Bank', 'sponsor', 14000, 12345678, 1);
 
 --
 -- Indexes for dumped tables
@@ -333,12 +355,14 @@ ALTER TABLE `department`
 --
 ALTER TABLE `event`
   ADD PRIMARY KEY (`event_id`);
+
 --
 -- Indexes for table `funding_request`
 --
 ALTER TABLE `funding_request`
   ADD PRIMARY KEY (`Event`,`Sponsor_email`),
   ADD KEY `Test` (`Sponsor_email`);
+
 --
 -- Indexes for table `member`
 --
@@ -359,6 +383,11 @@ ALTER TABLE `sponsor`
   ADD PRIMARY KEY (`Email`),
   ADD KEY `oca_id` (`oca_id`),
   ADD KEY `advisor_account` (`advisor_account`);
+
+--
+-- Constraints for dumped tables
+--
+
 --
 -- Constraints for table `funding_request`
 --
