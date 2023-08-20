@@ -121,5 +121,55 @@ $clubname = 'OCA';
         </div>
     </div>
 
+
+
+
+
+    <div class="incoming_request">
+        <h2 class="section-heading">Incoming Request</h2>
+        <div class="incoming_member-table">
+            <table>
+                <tr>
+                    <th>Event ID</th>
+                    <th>Name</th>
+                    <th>Cost</th>
+                    <th>Date</th>
+                    <th>capicity</th>
+                    <th>vanue</th>
+                    <th>Club Name</th>
+                    <th>Accept</th>
+                    <th>Reject</th>
+                </tr>
+                <?php 
+                require_once("dbconnect.php");
+                $sql_club = "SELECT id FROM oca  WHERE email = '$email' AND pin = $pin ";
+                $oca_id = mysqli_query($conn, $sql_club);
+                $oca_id1 = mysqli_fetch_array($oca_id);
+                //echo $oca_id1[0];
+
+                $sql = "SELECT * FROM incoming_event";
+                $result = mysqli_query($conn, $sql);
+                if(mysqli_num_rows($result) > 0){
+                    while($row = mysqli_fetch_array($result)){
+            ?>
+                <tr>
+                    <td><?php echo $row[0]; ?></td>
+                    <td><?php echo $row[1]; ?></td>
+                    <td><?php echo $row[2]; ?></td>
+                    <td><?php echo $row[3]; ?></td>
+                    <td><?php echo $row[4]; ?></td>
+                    <td><?php echo $row[5]; ?></td>
+                    <td><?php echo $row[6]; ?></td>
+                    <td><a href="accept_event.php?event_id=<?php echo $row[0]; ?>&name=<?php echo $row[1]; ?>&cost=<?php echo $row[2]; ?>&date=<?php echo $row[3]; ?>&capacity=<?php echo $row[4]; ?>&vanue=<?php echo $row[5]; ?>&club_name=<?php echo $row[6]; ?>&oca_id=<?php echo $oca_id1[0]; ?>" class="Accept_event">Accept</a></td>
+                    <td><a href="reject_event.php?event_id=<?php echo $row[0]; ?>&name=<?php echo $row[1]; ?>&cost=<?php echo $row[2]; ?>&date=<?php echo $row[3]; ?>&capacity=<?php echo $row[4]; ?>&vanue=<?php echo $row[5]; ?>&club_name=<?php echo $row[6]; ?>&oca_id=<?php echo $oca_id1[0]; ?>" class="Reject_event">Reject</a></td>
+                </tr>
+                <?php
+}
+                    }
+                ?>
+            </table>
+        </div>
+    </div>
+
 </body>
 </html>

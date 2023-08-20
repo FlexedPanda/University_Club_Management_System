@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 19, 2023 at 10:53 PM
+-- Generation Time: Aug 20, 2023 at 08:54 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -132,7 +132,9 @@ CREATE TABLE `event` (
 
 INSERT INTO `event` (`event_id`, `name`, `cost`, `date`, `capacity`, `vanue`, `oca_id`, `club_name`, `money_received`) VALUES
 (1, 'Robo Carnival', 10000, '2023-08-22', 1000, 'UB2', 2, 'robu', 200),
-(3, 'Lets Dance', 5000, '2023-08-15', 200, 'UB3', 2, 'BULDF', 4000);
+(3, 'Lets Dance', 5000, '2023-08-15', 200, 'UB3', 2, 'BULDF', 4000),
+(4, 'BRAC CSE Job Fest', 20000, '2023-08-25', 1000, 'UB2', 1, 'BUCC', 0),
+(5, 'BUCC Freshers Enquee', 15000, '2023-08-28', 500, 'UB2', 1, 'BUCC', 0);
 
 -- --------------------------------------------------------
 
@@ -196,13 +198,6 @@ CREATE TABLE `incoming_event` (
   `vanue` varchar(100) NOT NULL,
   `club_name` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `incoming_event`
---
-
-INSERT INTO `incoming_event` (`event_id`, `name`, `cost`, `date`, `capacity`, `vanue`, `club_name`) VALUES
-(4, 'BRAC CSE Job Fest', 20000, '2023-08-25', 1000, 'UB2', 'BUCC');
 
 -- --------------------------------------------------------
 
