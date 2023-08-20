@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 20, 2023 at 08:54 PM
+-- Generation Time: Aug 20, 2023 at 10:59 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -42,7 +42,7 @@ CREATE TABLE `advisor` (
 --
 
 INSERT INTO `advisor` (`email`, `name`, `pin`, `id`, `Bank_account`, `designation`, `balance`) VALUES
-('Kazi@gmail.com', 'Kazi Ahmed', 12345, 1, 12345678, 'advisor', 73800);
+('Kazi@gmail.com', 'Kazi Ahmed', 12345, 1, 12345678, 'advisor', 4100);
 
 -- --------------------------------------------------------
 
@@ -131,10 +131,11 @@ CREATE TABLE `event` (
 --
 
 INSERT INTO `event` (`event_id`, `name`, `cost`, `date`, `capacity`, `vanue`, `oca_id`, `club_name`, `money_received`) VALUES
-(1, 'Robo Carnival', 10000, '2023-08-22', 1000, 'UB2', 2, 'robu', 200),
+(1, 'Robo Carnival', 10000, '2023-08-22', 1000, 'UB2', 2, 'robu', 1100),
 (3, 'Lets Dance', 5000, '2023-08-15', 200, 'UB3', 2, 'BULDF', 4000),
-(4, 'BRAC CSE Job Fest', 20000, '2023-08-25', 1000, 'UB2', 1, 'BUCC', 0),
-(5, 'BUCC Freshers Enquee', 15000, '2023-08-28', 500, 'UB2', 1, 'BUCC', 0);
+(4, 'BRAC CSE Job Fest', 20000, '2023-08-25', 1000, 'UB2', 1, 'BUCC', 4000),
+(5, 'BUCC Freshers Enquee', 15000, '2023-08-28', 500, 'UB2', 1, 'BUCC', 10000),
+(6, 'BUCC Summer vibes', 15000, '2023-09-18', 900, 'UB2', 1, 'BUCC', 11000);
 
 -- --------------------------------------------------------
 
@@ -147,14 +148,6 @@ CREATE TABLE `funding_request` (
   `Event` varchar(40) NOT NULL,
   `Amount` int(40) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `funding_request`
---
-
-INSERT INTO `funding_request` (`Sponsor_email`, `Event`, `Amount`) VALUES
-('hasanul@xybank.org', 'Lets Dance', 4000),
-('hasanul@xybank.org', 'Robo Carnival', 10000);
 
 -- --------------------------------------------------------
 
@@ -321,7 +314,7 @@ CREATE TABLE `sponsor` (
 --
 
 INSERT INTO `sponsor` (`Email`, `Pin`, `name`, `Designation`, `funding`, `advisor_account`, `oca_id`) VALUES
-('hasanul@xybank.org', 12345, 'XY Bank', 'sponsor', 14000, 12345678, 1);
+('hasanul@xybank.org', 12345, 'XY Bank', 'sponsor', 52000, 12345678, 1);
 
 --
 -- Indexes for dumped tables

@@ -4,6 +4,7 @@ require_once("dbconnect.php");
 if(isset($_POST['accept_request'])) {
     $sponsorID = $_POST['sponsorID'];
     $amount = $_POST['amount'];
+    $eventname = $_POST['event'];
 
     $sql = "SELECT * FROM advisor";
     $result = mysqli_query($conn, $sql);
@@ -17,12 +18,27 @@ if(isset($_POST['accept_request'])) {
 
     if ($updateResult) {
         // Successfully updated balance
-        echo "Successfully added funding.";
+        $eventdeletesql = "DELETE FROM funding_request WHERE sponsor_email= '$sponsorID' and event = '$eventname' and amount = '$amount' ";
+        if (mysqli_query($conn,  $eventdeletesql)) {
+        echo "Successfully added funding.";}
     } else {
         echo "Error updating balance: " . mysqli_error($conn);
     }
 }
-}
+}elseif(isset($_POST['reject_request'])){
+    $sponsorID = $_POST['sponsorID'];
+    $amount = $_POST['amount'];
+    $eventname = $_POST['event'];
+
+    $sql = "SELECT * FROM advisor";
+    $result = mysqli_query($conn, $sql);
+    if(mysqli_num_rows($result) > 0){
+        while($row = mysqli_fetch_array($result))
+    $eventdeletesql = "DELETE FROM funding_request WHERE sponsor_email= '$sponsorID' and event = '$eventname' and amount = '$amount' ";
+        if (mysqli_query($conn,  $eventdeletesql)) {
+        echo "Successfully denied funding.";}
+
+}}
 //withdrawing money 
 $sql = "SELECT * FROM advisor";
 $result = mysqli_query($conn, $sql);
@@ -213,8 +229,9 @@ if(isset($_POST['provide_fund'])) {
     <form action="" method="post">
         <input type="hidden" name="sponsorID" value="<?php echo $row[0]; ?>">
         <input type="hidden" name="amount" value="<?php echo $row[2]; ?>">
+        <input type="hidden" name="event" value="<?php echo $row[1]; ?>">
         <button class="accept-request" name="accept_request">Add</button>
-        <button class="reject-request">Reject</button>
+        <button class="reject-request" name = 'reject_request'>Reject</button>
     </form>
 </div>
             <?php 
