@@ -59,9 +59,7 @@ if(isset($_POST['oca_request'])) {
                 
                 if ($deleteOCAResult) {
                     echo "Successfully added funding from OCA.";
-                } else {
-                    echo "Error deleting OCA funding request: " . mysqli_error($conn);
-                }
+                } 
             } else {
                 echo "Error adding OCA funding to advisor balance: " . mysqli_error($conn);
             }
@@ -90,8 +88,8 @@ if(isset($_POST['withdraw_balance'])) {
 if(isset($_POST['provide_fund'])) {
     $eventID = $_POST['eventID'];
     $fundAmount = $_POST['fundAmount'];
-    $insufficientBalance = false; // Flag to track insufficient balance
-    $exceedsCost = false; // Flag to track exceeding cost
+    $insufficientBalance = false; 
+    $exceedsCost = false; 
     
     // Check if all advisors have sufficient balance
     $sqlAdvisor = "SELECT * FROM advisor";
@@ -101,8 +99,8 @@ if(isset($_POST['provide_fund'])) {
             $advisorBalance = $rowAdvisor[6];
             
             if ($advisorBalance < $fundAmount) {
-                $insufficientBalance = true; // Set the flag to true
-                break; // Exit the loop since funding is not possible
+                $insufficientBalance = true; 
+                break; 
             }
         }
     }
@@ -111,25 +109,25 @@ if(isset($_POST['provide_fund'])) {
     $sqlEvent = "SELECT * FROM event WHERE event_id = $eventID";
     $resultEvent = mysqli_query($conn, $sqlEvent);
     $eventRow = mysqli_fetch_array($resultEvent);
-    $totalFunding = $eventRow[8] + $fundAmount; // Money received + New funding
+    $totalFunding = $eventRow[8] + $fundAmount; 
     
     if ($totalFunding > $eventRow[2]) {
-        $exceedsCost = true; // Set the flag to true
+        $exceedsCost = true; 
     }
     
     if ($insufficientBalance) {
-        echo "Funding not possible due to insufficient balance for at least one advisor.";
+        echo "Funding not possible due to insufficient balance .";
     } elseif ($exceedsCost) {
-        echo "Funding not possible because total funding exceeds the event's cost.";
+        echo "Funding not necessary because total funding exceeds the event's cost.";
     } else {
         // Update the money received for the event
         $updateEventQuery = "UPDATE event SET money_received = money_received + $fundAmount WHERE event_id = $eventID"; 
         $updateEventResult = mysqli_query($conn, $updateEventQuery);
 
         if ($updateEventResult) {
-            // Successfully updated event's money received
             
-            // Deduct the fund amount from advisors' balances
+            
+            // Deduct the fund amount from advisors' balance
             $resultAdvisor = mysqli_query($conn, $sqlAdvisor);
             if(mysqli_num_rows($resultAdvisor) > 0){
                 while($rowAdvisor = mysqli_fetch_array($resultAdvisor)){
