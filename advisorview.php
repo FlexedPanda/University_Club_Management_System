@@ -39,6 +39,36 @@ if(isset($_POST['accept_request'])) {
         echo "Successfully denied funding.";}
 
 }}
+// oca funding
+if(isset($_POST['oca_request'])) {
+    $ocaID = $_POST['ocaID'];
+    $funding = $_POST['funding'];
+
+    $sqlAdvisor = "SELECT * FROM advisor";
+    $resultAdvisor = mysqli_query($conn, $sqlAdvisor);
+    if(mysqli_num_rows($resultAdvisor) > 0){
+        while($rowAdvisor = mysqli_fetch_array($resultAdvisor)){
+            $advisorID = $rowAdvisor[3];
+            $updateBalanceQuery = "UPDATE advisor SET balance = balance + $funding WHERE id = $advisorID"; 
+            $updateBalanceResult = mysqli_query($conn, $updateBalanceQuery);
+
+            if ($updateBalanceResult) {
+                // Update successful
+                $deleteOCASql = "UPDATE oca set funding = 0 where id= $ocaID";
+                $deleteOCAResult = mysqli_query($conn, $deleteOCASql);
+                
+                if ($deleteOCAResult) {
+                    echo "Successfully added funding from OCA.";
+                } else {
+                    echo "Error deleting OCA funding request: " . mysqli_error($conn);
+                }
+            } else {
+                echo "Error adding OCA funding to advisor balance: " . mysqli_error($conn);
+            }
+        }
+    }
+}
+
 //withdrawing money 
 $sql = "SELECT * FROM advisor";
 $result = mysqli_query($conn, $sql);
@@ -120,7 +150,6 @@ if(isset($_POST['provide_fund'])) {
 }
 
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -145,7 +174,7 @@ if(isset($_POST['provide_fund'])) {
     <div class="Dept-messages">
     <h2 class="section-heading">Announcements</h2>
     <?php 
-                require_once("dbconnect.php");
+ 
                 $sql = "SELECT * FROM departmentmessages";
                 $result = mysqli_query($conn, $sql);
                 if(mysqli_num_rows($result) > 0){
@@ -165,7 +194,7 @@ if(isset($_POST['provide_fund'])) {
         <h2 class = 'section-heading'>Advisor Details</h2>
         <div class="advisor-details-dev">
             <?php 
-                require_once("dbconnect.php");
+
                 $sql = "SELECT * FROM advisor";
                 $result = mysqli_query($conn, $sql);
                 if(mysqli_num_rows($result) > 0){
@@ -192,7 +221,6 @@ if(isset($_POST['provide_fund'])) {
         <h2 class = 'section-heading'>Upcoming Events</h2>
         <div class="upcoming-events-dev">
             <?php 
-                require_once("dbconnect.php");
                 $sql = "SELECT * FROM event";
                 $result = mysqli_query($conn, $sql);
                 if(mysqli_num_rows($result) > 0){
@@ -215,7 +243,6 @@ if(isset($_POST['provide_fund'])) {
     <h2 class="section-heading">Incoming Funding </h2>
     <div class="incoming-requests">
     <?php 
-            require_once("dbconnect.php");
             $sql = "SELECT f.sponsor_email, f.event, f.amount, s.name FROM funding_request as f
                         INNER JOIN sponsor as s where f.Sponsor_email = s.email ";
             $result = mysqli_query($conn, $sql);
@@ -233,6 +260,7 @@ if(isset($_POST['provide_fund'])) {
         <button class="accept-request" name="accept_request">Add</button>
         <button class="reject-request" name = 'reject_request'>Reject</button>
     </form>
+    
 </div>
             <?php 
                     }
@@ -241,7 +269,31 @@ if(isset($_POST['provide_fund'])) {
   
     </div>
 </div>
-
+</div>
+<h2 class="section-heading">OCA funds </h2>
+<div class="incoming-requests">
+    <?php 
+    $sql = "SELECT * from oca";
+    $result = mysqli_query($conn, $sql);
+    if(mysqli_num_rows($result) > 0){
+        while($row = mysqli_fetch_array($result)){
+            if ($row[6] != 0) { 
+    ?>
+        <div class="request">
+            <p>OCA employee: <?php echo $row[0]; ?></p>
+            <p>Funding: <?php echo $row[6]; ?></p>
+            <form action="" method="post">
+                <input type="hidden" name="ocaID" value="<?php echo $row[1]; ?>">
+                <input type="hidden" name="funding" value="<?php echo $row[6]; ?>">
+                <button class="oca_request" name="oca_request">Add</button>
+            </form>
+        </div>
+    <?php 
+            } 
+        }
+    }
+    ?>
+</div>
 <div class="search-event">
         <h2 class="section-heading">Event Details:</h2>
         <div class="event-table">
@@ -259,7 +311,6 @@ if(isset($_POST['provide_fund'])) {
         <th>Provide fund</th>
     </tr>
     <?php 
-    require_once("dbconnect.php");
     $sql = "SELECT * FROM event";
     $result = mysqli_query($conn, $sql);
     if(mysqli_num_rows($result) > 0){
@@ -290,7 +341,18 @@ if(isset($_POST['provide_fund'])) {
 </table>
         </div>
     </div>
-
+<style>
+           .footer {
+            text-align: center;
+            margin-top: 20px;
+            padding: 10px;
+            background-color: rgba(0, 0, 0, 0);
+           }
+</style>
+<div class="footer">
+    <p>&copy; 2023 University Club Management Platform. All rights reserved.</p>
+  </div>
 </div>
 </body>
 </html>
+

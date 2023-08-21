@@ -254,20 +254,21 @@ INSERT INTO `member` (`student_id`, `name`, `designation`, `email`, `dob`, `depa
 --
 
 CREATE TABLE `oca` (
-  `Name` varchar(100) NOT NULL,
-  `ID` int(100) NOT NULL,
-  `Contact_No` int(100) NOT NULL,
-  `Email` varchar(100) NOT NULL,
-  `Pin` int(100) NOT NULL,
-  `Designation` varchar(100) NOT NULL
+ `Name` varchar(100) NOT NULL,
+ `ID` int(100) NOT NULL,
+ `Contact_No` int(100) NOT NULL,
+ `Email` varchar(100) NOT NULL,
+ `Pin` int(100) NOT NULL,
+ `Designation` varchar(100) NOT NULL,
+ `funding` int(11) DEFAULT NULL,
+ PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
 --
 -- Dumping data for table `oca`
 --
 
-INSERT INTO `oca` (`Name`, `ID`, `Contact_No`, `Email`, `Pin`, `Designation`) VALUES
-('mahmud', 1, 1345687, 'oca.mahmud@bracu.com', 12345, 'oca');
+INSERT INTO `oca` (`Name`, `ID`, `Contact_No`, `Email`, `Pin`, `Designation`, `funding`) VALUES 
+('mahmud', '1', '1345687', 'oca.mahmud@bracu.com', '12345', 'oca', NULL);
 
 -- --------------------------------------------------------
 
