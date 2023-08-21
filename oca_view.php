@@ -10,7 +10,29 @@ $clubname = 'OCA';
 
 ?>
 
+<?php
 
+if (isset($_POST["provide_fund"])) {
+    $eventID = $_POST["eventID"];
+    $fundAmount = $_POST["fundAmount"];
+    $sql = "SELECT * FROM oca";
+    $result = mysqli_query($conn, $sql);
+    if(mysqli_num_rows($result) > 0){
+        while($row = mysqli_fetch_array($result))
+
+    // Update the funding attribute of OCA club
+    $updateSQL = "UPDATE oca SET funding = funding + $fundAmount WHERE id = $row[1]";
+    $updateResult = mysqli_query($conn, $updateSQL);
+    
+    if ($updateResult) {
+        echo "Fund provided to advisor for events";
+    } else {
+
+        echo "Error updating funding: " . mysqli_error($conn);
+    }
+}
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -67,10 +89,17 @@ $clubname = 'OCA';
                 <p> Venue: <?php echo $row[5]; ?></p>
                 <p> Date: <?php echo $row[3]; ?></p>
             </div>
+            
             <?php 
                     }
                 }
             ?>
+            <h2>"Funding for events"</h2>
+           <form action="" method="post">
+                <input type="hidden" name="eventID" value="<?php echo $row[0]; ?>">
+                <input type="number" name="fundAmount" placeholder="Enter Amount" required>
+                <button class="provide-fund" name="provide_fund">Provide Fund</button>
+            </form>
         </div>
     </div>
 
