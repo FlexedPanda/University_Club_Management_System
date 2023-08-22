@@ -48,21 +48,7 @@ INSERT INTO `advisor` (`email`, `name`, `pin`, `id`, `Bank_account`, `designatio
 
 -- --------------------------------------------------------
 
---
--- Table structure for table `oca_fund`
---
---
 
-	CREATE TABLE `oca_fund` (
- `OCA_ID` int(100) NOT NULL,
- `funding` int(11) DEFAULT NULL,
- `event` varchar(50) NOT NULL,
- PRIMARY KEY (`OCA_ID`,`event`),
- CONSTRAINT `test1` FOREIGN KEY (`OCA_ID`) REFERENCES `oca` (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
-
--- --------------------------------------------------------
 
 -- Table structure for table `club`
 --
@@ -350,7 +336,21 @@ INSERT INTO `sponsor` (`Email`, `Pin`, `name`, `Designation`, `funding`, `adviso
 --
 -- Indexes for dumped tables
 --
+--
+-- Table structure for table `oca_fund`
+--
+--
 
+	CREATE TABLE `oca_fund` (
+ `OCA_ID` int(100) NOT NULL,
+ `funding` int(11) DEFAULT NULL,
+ `event` varchar(50) NOT NULL,
+ PRIMARY KEY (`OCA_ID`,`event`),
+ CONSTRAINT `test1` FOREIGN KEY (`OCA_ID`) REFERENCES `oca` (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+-- --------------------------------------------------------
 --
 -- Indexes for table `advisor`
 --
@@ -418,6 +418,7 @@ ALTER TABLE `sponsor`
 --
 ALTER TABLE `funding_request`
   ADD CONSTRAINT `Test` FOREIGN KEY (`Sponsor_email`) REFERENCES `sponsor` (`Email`);
+
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
