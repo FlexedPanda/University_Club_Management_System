@@ -18,15 +18,34 @@ $clubname = 'OCA';
     $oca_id_temp = mysqli_query($conn, $oca_id_sql );
     $oca_id = mysqli_fetch_assoc($oca_id_temp);
     $oca_id = $oca_id['id'] ;
+    $eventsql = "SELECT * FROM event where event_id = $eventID";
+    $eventquery = mysqli_query($conn,$eventsql);
+    $eventresult = mysqli_fetch_assoc($eventquery);
+    $eventname = $eventresult['name'];
     // Update the funding attribute of OCA club
-    $updateSQL = "UPDATE oca SET funding = funding + $fundAmount WHERE id = $oca_id ";
-    $updateResult = mysqli_query($conn, $updateSQL);
     
-    if ($updateResult) {
-        echo "Fund provided to advisor for events";
-    } else {
+    
+    $checkQuery = "SELECT * FROM oca_fund WHERE oca_id = '$oca_id' and event = '$eventname'";
+    $checkResult = mysqli_query($conn, $checkQuery);
+    
+    if ($checkResult -> num_rows>0) {
+        $updateQuery = "UPDATE oca_fund 
+                            SET funding = funding + $fundAmount
+                            WHERE oca_id = '$oca_id' AND event = '$eventname'";
+        $updateResult = $conn->query($updateQuery);
 
-        echo "Error updating funding: " . mysqli_error($conn);
+
+    } else {
+        $insertQuery = "INSERT INTO oca_fund (oca_id, funding, event)
+                        VALUES ('$oca_id', $fundAmount, '$eventname')";
+        $updateResult = $conn->query($insertQuery);
+    }
+
+    if ($updateResult){
+        echo 'Donation sent to advisor.';
+    }
+    else{
+        echo 'Error while sending';
     }
 }
 
@@ -86,18 +105,17 @@ $clubname = 'OCA';
                 <h3><?php echo $row[1]; ?></h3>
                 <p> Venue: <?php echo $row[5]; ?></p>
                 <p> Date: <?php echo $row[3]; ?></p>
+                <form action="" method="post">
+                <input type="hidden" name="eventID" value="<?php echo $row[0]; ?>">
+                <input type="number" name="fundAmount" placeholder="Enter Amount" required>
+                <button class="provide-fund" name="provide_fund">Provide Fund</button>
+            </form>
             </div>
             
             <?php 
                     }
                 }
             ?>
-            <h2>"Funding for events"</h2>
-           <form action="" method="post">
-                <input type="hidden" name="eventID" value="<?php echo $row[0]; ?>">
-                <input type="number" name="fundAmount" placeholder="Enter Amount" required>
-                <button class="provide-fund" name="provide_fund">Provide Fund</button>
-            </form>
         </div>
     </div>
 

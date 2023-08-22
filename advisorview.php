@@ -1,6 +1,17 @@
 <?php
 require_once("dbconnect.php");
 $advisoremail = $_GET['email'];
+$sql = "SELECT * FROM advisor where email = '$advisoremail'";
+$result = mysqli_query($conn, $sql);
+$row = mysqli_fetch_array($result);
+$balance = $row[6];
+$name= $row[1];
+$ID= $row[3];
+$club = $row[7];
+$bank = $row[4];
+
+
+
 // sponsor request accept or reject
 if(isset($_POST['accept_request'])) {
     $sponsorID = $_POST['sponsorID'];
@@ -44,7 +55,8 @@ if(isset($_POST['accept_request'])) {
 if(isset($_POST['oca_request'])) {
     $ocaID = $_POST['ocaID'];
     $funding = $_POST['funding'];
-
+    $event = $_POST['event'];
+    $advisoremail = $_GET['email'];
     $sqlAdvisor = "SELECT * FROM advisor where email = '$advisoremail'";
     $resultAdvisor = mysqli_query($conn, $sqlAdvisor);
     if(mysqli_num_rows($resultAdvisor) > 0){
@@ -55,7 +67,7 @@ if(isset($_POST['oca_request'])) {
 
             if ($updateBalanceResult) {
                 // Update successful
-                $deleteOCASql = "UPDATE oca set funding = 0 where id= $ocaID";
+                $deleteOCASql = "delete from oca_fund where oca_id = '$ocaID' and event = '$event' and funding = '$funding'";
                 $deleteOCAResult = mysqli_query($conn, $deleteOCASql);
                 
                 if ($deleteOCAResult) {
@@ -192,27 +204,25 @@ if(isset($_POST['provide_fund'])) {
     <div class="advisor-details">
         <h2 class = 'section-heading'>Advisor Details</h2>
         <div class="advisor-details-dev">
-            <?php 
-                $advisoremail = $_GET['email'];
-                $sql = "SELECT * FROM advisor where email = '$advisoremail'";
-                $result = mysqli_query($conn, $sql);
-                if(mysqli_num_rows($result) > 0){
-                    while($row = mysqli_fetch_array($result)){
-            ?>
+            <?php
+            $sql = "SELECT * FROM advisor where email = '$advisoremail'";
+$result = mysqli_query($conn, $sql);
+$row = mysqli_fetch_array($result);
+$balance = $row[6];
+
+?>
             <div class="advisor">
-                <h3> Name: <?php echo $row[1]; ?></h3>
-                <p> ID: <?php echo $row[3]; ?></p>
-                <p> Bank Account Mumber: <?php echo $row[4]; ?></p>
-                <p> Balance: <?php echo $row[6]; ?></p>
+                <h3> Name: <?php echo $name; ?></h3>
+                <p> ID: <?php echo $ID; ?></p>
+                <p> Club: <?php echo $club; ?></p>
+                <p> Bank Account Number: <?php echo $bank; ?></p>
+                <p> Balance: <?php echo $balance; ?></p>
                 <form action="" method="post">
         <button class="withdraw-balance" name="withdraw_balance">Withdraw All Funds</button>
     </form> 
 
             </div>
-            <?php 
-                    }
-                }
-            ?>
+            
         </div>
     </div>
 
@@ -291,18 +301,33 @@ if(isset($_POST['provide_fund'])) {
 <h2 class="section-heading">OCA funds </h2>
 <div class="incoming-requests">
     <?php 
-    $sql = "SELECT * from oca";
+    $sql = "SELECT * from oca_fund";
     $result = mysqli_query($conn, $sql);
     if(mysqli_num_rows($result) > 0){
         while($row = mysqli_fetch_array($result)){
-            if ($row[6] != 0) { 
+            $advisoremail = $_GET['email'];
+                        
+                        $advisorclub_sql = "select club from advisor where email = '$advisoremail'";
+
+                        $result_club = mysqli_query($conn,  $advisorclub_sql);
+                        $advisor_club = mysqli_fetch_assoc($result_club);
+                        //echo $advisor_club["club"];
+
+                        $event_name = $row[2];
+                        $event_club_sql = "select club_name from event where name = '$event_name'";
+                        $result_event_club = mysqli_query($conn, $event_club_sql);
+                        $event_club = mysqli_fetch_assoc($result_event_club);
+
+                        if ($advisor_club['club'] == $event_club['club_name']){
+                        
     ?>
         <div class="request">
-            <p>OCA employee: <?php echo $row[0]; ?></p>
-            <p>Funding: <?php echo $row[6]; ?></p>
+            <p>Event name: <?php echo $row[2]; ?></p>
+            <p>Funding: <?php echo $row[1]; ?></p>
             <form action="" method="post">
-                <input type="hidden" name="ocaID" value="<?php echo $row[1]; ?>">
-                <input type="hidden" name="funding" value="<?php echo $row[6]; ?>">
+                <input type="hidden" name="ocaID" value="<?php echo $row[0]; ?>">
+                <input type="hidden" name="funding" value="<?php echo $row[1]; ?>">
+                <input type="hidden" name="event" value="<?php echo $row[2]; ?>">
                 <button class="oca_request" name="oca_request">Add</button>
             </form>
         </div>
