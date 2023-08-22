@@ -1,12 +1,13 @@
 <?php
 require_once("dbconnect.php");
+$advisoremail = $_GET['email'];
 // sponsor request accept or reject
 if(isset($_POST['accept_request'])) {
     $sponsorID = $_POST['sponsorID'];
     $amount = $_POST['amount'];
     $eventname = $_POST['event'];
-
-    $sql = "SELECT * FROM advisor";
+    $advisoremail = $_GET['email'];
+    $sql = "SELECT * FROM advisor where email = '$advisoremail'";
     $result = mysqli_query($conn, $sql);
     if(mysqli_num_rows($result) > 0){
         while($row = mysqli_fetch_array($result))
@@ -30,7 +31,7 @@ if(isset($_POST['accept_request'])) {
     $amount = $_POST['amount'];
     $eventname = $_POST['event'];
 
-    $sql = "SELECT * FROM advisor";
+    $sql = "SELECT * FROM advisor where email = '$advisoremail'";
     $result = mysqli_query($conn, $sql);
     if(mysqli_num_rows($result) > 0){
         while($row = mysqli_fetch_array($result))
@@ -44,7 +45,7 @@ if(isset($_POST['oca_request'])) {
     $ocaID = $_POST['ocaID'];
     $funding = $_POST['funding'];
 
-    $sqlAdvisor = "SELECT * FROM advisor";
+    $sqlAdvisor = "SELECT * FROM advisor where email = '$advisoremail'";
     $resultAdvisor = mysqli_query($conn, $sqlAdvisor);
     if(mysqli_num_rows($resultAdvisor) > 0){
         while($rowAdvisor = mysqli_fetch_array($resultAdvisor)){
@@ -68,7 +69,7 @@ if(isset($_POST['oca_request'])) {
 }
 
 //withdrawing money 
-$sql = "SELECT * FROM advisor";
+$sql = "SELECT * FROM advisor where email = '$advisoremail'";
 $result = mysqli_query($conn, $sql);
 if(mysqli_num_rows($result) > 0){
     while($row = mysqli_fetch_array($result))
@@ -92,7 +93,7 @@ if(isset($_POST['provide_fund'])) {
     $exceedsCost = false; 
     
     // Check if all advisors have sufficient balance
-    $sqlAdvisor = "SELECT * FROM advisor";
+    $sqlAdvisor = "SELECT * FROM advisor where email = '$advisoremail'";
     $resultAdvisor = mysqli_query($conn, $sqlAdvisor);
     if(mysqli_num_rows($resultAdvisor) > 0){
         while($rowAdvisor = mysqli_fetch_array($resultAdvisor)){
@@ -192,8 +193,8 @@ if(isset($_POST['provide_fund'])) {
         <h2 class = 'section-heading'>Advisor Details</h2>
         <div class="advisor-details-dev">
             <?php 
-
-                $sql = "SELECT * FROM advisor";
+                $advisoremail = $_GET['email'];
+                $sql = "SELECT * FROM advisor where email = '$advisoremail'";
                 $result = mysqli_query($conn, $sql);
                 if(mysqli_num_rows($result) > 0){
                     while($row = mysqli_fetch_array($result)){
@@ -246,6 +247,25 @@ if(isset($_POST['provide_fund'])) {
             $result = mysqli_query($conn, $sql);
                 if(mysqli_num_rows($result) > 0){
                     while($row = mysqli_fetch_array($result)){
+                        $advisoremail = $_GET['email'];
+                        
+                        $advisorclub_sql = "select club from advisor where email = '$advisoremail'";
+
+                        $result_club = mysqli_query($conn,  $advisorclub_sql);
+                        $advisor_club = mysqli_fetch_assoc($result_club);
+                        //echo $advisor_club["club"];
+
+                        $event_name = $row[1];
+                        $event_club_sql = "select club_name from event where name = '$event_name'";
+                        $result_event_club = mysqli_query($conn, $event_club_sql);
+                        $event_club = mysqli_fetch_assoc($result_event_club);
+
+                        if ($advisor_club['club'] == $event_club['club_name']){
+                        
+
+
+                        
+
             ?>
                 <div class="request">
     <p>Sponsor: <?php echo $row[3]; ?></p>
@@ -261,7 +281,7 @@ if(isset($_POST['provide_fund'])) {
     
 </div>
             <?php 
-                    }
+                    }}
                 }
             ?>
   

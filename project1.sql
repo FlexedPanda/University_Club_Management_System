@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 22, 2023 at 04:18 AM
+-- Generation Time: Aug 22, 2023 at 11:02 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -34,15 +34,17 @@ CREATE TABLE `advisor` (
   `id` int(11) NOT NULL,
   `Bank_account` int(11) NOT NULL,
   `designation` varchar(20) NOT NULL,
-  `balance` int(11) NOT NULL
+  `balance` int(11) NOT NULL,
+  `club` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `advisor`
 --
 
-INSERT INTO `advisor` (`email`, `name`, `pin`, `id`, `Bank_account`, `designation`, `balance`) VALUES
-('Kazi@gmail.com', 'Kazi Ahmed', 12345, 1, 12345678, 'advisor', 4200);
+INSERT INTO `advisor` (`email`, `name`, `pin`, `id`, `Bank_account`, `designation`, `balance`, `club`) VALUES
+('mahim@bracu.com', 'Mahim Chowdhury', 12345, 2, 42323, 'advisor', 7500, 'BULDF'),
+('Kazi@gmail.com', 'Kazi Ahmed', 12345, 1, 12345678, 'advisor', 0, 'BUCC');
 
 -- --------------------------------------------------------
 
@@ -131,11 +133,11 @@ CREATE TABLE `event` (
 --
 
 INSERT INTO `event` (`event_id`, `name`, `cost`, `date`, `capacity`, `vanue`, `oca_id`, `club_name`, `money_received`) VALUES
-(1, 'Robo Carnival', 10000, '2023-08-22', 1000, 'UB2', 2, 'robu', 1800),
-(3, 'Lets Dance', 5000, '2023-08-15', 200, 'UB3', 2, 'BULDF', 4100),
-(4, 'BRAC CSE Job Fest', 20000, '2023-08-25', 1000, 'UB2', 1, 'BUCC', 5000),
+(1, 'Robo Carnival', 10000, '2023-08-22', 1000, 'UB2', 2, 'robu', 2200),
+(3, 'Lets Dance', 5000, '2023-08-15', 200, 'UB3', 2, 'BULDF', 4200),
+(4, 'BRAC CSE Job Fest', 20000, '2023-08-25', 1000, 'UB2', 1, 'BUCC', 6400),
 (5, 'BUCC Freshers Enquee', 15000, '2023-08-28', 500, 'UB2', 1, 'BUCC', 10100),
-(6, 'BUCC Summer vibes', 15000, '2023-09-18', 900, 'UB2', 1, 'BUCC', 11200);
+(6, 'BUCC Summer vibes', 15000, '2023-09-18', 900, 'UB2', 1, 'BUCC', 11500);
 
 -- --------------------------------------------------------
 
@@ -154,7 +156,7 @@ CREATE TABLE `funding_request` (
 --
 
 INSERT INTO `funding_request` (`Sponsor_email`, `Event`, `Amount`) VALUES
-('hasanul@xybank.org', 'Lets Dance', 1000);
+('hasanul@xybank.org', 'BRAC CSE Job Fest', 10000);
 
 -- --------------------------------------------------------
 
@@ -296,11 +298,15 @@ CREATE TABLE `participate` (
 INSERT INTO `participate` (`member_id`, `event_id`) VALUES
 (2, 1),
 (2, 3),
+(11, 4),
+(11, 5),
 (11, 6),
 (12, 1),
 (12, 3),
 (21, 1),
 (21, 3),
+(21, 4),
+(21, 5),
 (44, 1);
 
 -- --------------------------------------------------------
@@ -324,7 +330,7 @@ CREATE TABLE `sponsor` (
 --
 
 INSERT INTO `sponsor` (`Email`, `Pin`, `name`, `Designation`, `funding`, `advisor_account`, `oca_id`) VALUES
-('hasanul@xybank.org', 12345, 'XY Bank', 'sponsor', 57000, 12345678, 1);
+('hasanul@xybank.org', 12345, 'XY Bank', 'sponsor', 90000, 12345678, 1);
 
 --
 -- Indexes for dumped tables
