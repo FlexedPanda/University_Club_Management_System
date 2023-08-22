@@ -151,6 +151,8 @@ if ($row = mysqli_fetch_assoc($result)) {
                 $result = mysqli_query($conn, $sql);
                 if(mysqli_num_rows($result) > 0){
                     while($row = mysqli_fetch_array($result)){
+                        if ($row[7] == $clubname){
+
             ?>
                 <tr>
                     <td><?php echo $row[0]; ?></td>
@@ -165,7 +167,7 @@ if ($row = mysqli_fetch_assoc($result)) {
                     <td><a href="edit_member.php?student_id=<?php echo $row[0]; ?>&name=<?php echo $row[1]; ?>&designation=<?php echo $row[2]; ?>&email=<?php echo $row[3]; ?>&dob=<?php echo $row[4]; ?>&department=<?php echo $row[5]; ?>&gender=<?php echo $row[6]; ?>&pin=<?php echo $row[8]; ?>&contact_no=<?php echo $row[9]; ?>" class="edit-member">Edit Member Details</a></td>
                 </tr>
                 <?php
-}
+}}
                     }
                 ?>
             </table>
