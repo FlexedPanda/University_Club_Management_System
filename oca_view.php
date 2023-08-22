@@ -11,17 +11,15 @@ $clubname = 'OCA';
 ?>
 
 <?php
-
-if (isset($_POST["provide_fund"])) {
+    if (isset($_POST["provide_fund"])) {
     $eventID = $_POST["eventID"];
     $fundAmount = $_POST["fundAmount"];
-    $sql = "SELECT * FROM oca";
-    $result = mysqli_query($conn, $sql);
-    if(mysqli_num_rows($result) > 0){
-        while($row = mysqli_fetch_array($result))
-
+    $oca_id_sql = "SELECT id FROM oca WHERE  email = '$email' AND pin = $pin";
+    $oca_id_temp = mysqli_query($conn, $oca_id_sql );
+    $oca_id = mysqli_fetch_assoc($oca_id_temp);
+    $oca_id = $oca_id['id'] ;
     // Update the funding attribute of OCA club
-    $updateSQL = "UPDATE oca SET funding = funding + $fundAmount WHERE id = $row[1]";
+    $updateSQL = "UPDATE oca SET funding = funding + $fundAmount WHERE id = $oca_id ";
     $updateResult = mysqli_query($conn, $updateSQL);
     
     if ($updateResult) {
@@ -31,7 +29,7 @@ if (isset($_POST["provide_fund"])) {
         echo "Error updating funding: " . mysqli_error($conn);
     }
 }
-}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">

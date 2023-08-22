@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 20, 2023 at 10:59 PM
+-- Generation Time: Aug 22, 2023 at 04:18 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -42,7 +42,7 @@ CREATE TABLE `advisor` (
 --
 
 INSERT INTO `advisor` (`email`, `name`, `pin`, `id`, `Bank_account`, `designation`, `balance`) VALUES
-('Kazi@gmail.com', 'Kazi Ahmed', 12345, 1, 12345678, 'advisor', 4100);
+('Kazi@gmail.com', 'Kazi Ahmed', 12345, 1, 12345678, 'advisor', 4200);
 
 -- --------------------------------------------------------
 
@@ -131,11 +131,11 @@ CREATE TABLE `event` (
 --
 
 INSERT INTO `event` (`event_id`, `name`, `cost`, `date`, `capacity`, `vanue`, `oca_id`, `club_name`, `money_received`) VALUES
-(1, 'Robo Carnival', 10000, '2023-08-22', 1000, 'UB2', 2, 'robu', 1100),
-(3, 'Lets Dance', 5000, '2023-08-15', 200, 'UB3', 2, 'BULDF', 4000),
-(4, 'BRAC CSE Job Fest', 20000, '2023-08-25', 1000, 'UB2', 1, 'BUCC', 4000),
-(5, 'BUCC Freshers Enquee', 15000, '2023-08-28', 500, 'UB2', 1, 'BUCC', 10000),
-(6, 'BUCC Summer vibes', 15000, '2023-09-18', 900, 'UB2', 1, 'BUCC', 11000);
+(1, 'Robo Carnival', 10000, '2023-08-22', 1000, 'UB2', 2, 'robu', 1800),
+(3, 'Lets Dance', 5000, '2023-08-15', 200, 'UB3', 2, 'BULDF', 4100),
+(4, 'BRAC CSE Job Fest', 20000, '2023-08-25', 1000, 'UB2', 1, 'BUCC', 5000),
+(5, 'BUCC Freshers Enquee', 15000, '2023-08-28', 500, 'UB2', 1, 'BUCC', 10100),
+(6, 'BUCC Summer vibes', 15000, '2023-09-18', 900, 'UB2', 1, 'BUCC', 11200);
 
 -- --------------------------------------------------------
 
@@ -148,6 +148,13 @@ CREATE TABLE `funding_request` (
   `Event` varchar(40) NOT NULL,
   `Amount` int(40) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `funding_request`
+--
+
+INSERT INTO `funding_request` (`Sponsor_email`, `Event`, `Amount`) VALUES
+('hasanul@xybank.org', 'Lets Dance', 1000);
 
 -- --------------------------------------------------------
 
@@ -243,7 +250,7 @@ INSERT INTO `member` (`student_id`, `name`, `designation`, `email`, `dob`, `depa
 (44, 'John Wick', 'executive', 'john@gmail.com', '2005-01-10', 'LLB', 'male', 'BUCC', 12345, 91911),
 (49, 'Riaz boi', 'general', 'riaz@gmail.com', '2000-03-05', 'EEE', 'male', 'BUCC', 12345, 1112220004),
 (50, 'Rasel', 'general', 'rasel@gmail.com', '2001-05-06', 'BBA', 'male', 'BUCC', 12345, 7535335),
-(51, 'Keka', 'general', 'keka@gmail.com', '1992-09-03', 'EEE', 'male', 'BUCC', 12345, 8938594),
+(51, 'Keka', 'general', 'keka@gmail.com', '1992-09-03', 'EEE', 'Female', 'BUCC', 12345, 8938594),
 (98, 'Jon Snow The King In the North', 'president', 'jonsnow@beyondthewall.org', '2000-08-10', 'CSE', 'Male', 'BULDF', 12345, 1377434543),
 (99, 'Riazul Karim', 'president', 'riazul.karim@g.bracu.ac.bd', '2023-08-10', 'CSE', 'Male', 'robu', 12345, 1812345789);
 
@@ -254,21 +261,22 @@ INSERT INTO `member` (`student_id`, `name`, `designation`, `email`, `dob`, `depa
 --
 
 CREATE TABLE `oca` (
- `Name` varchar(100) NOT NULL,
- `ID` int(100) NOT NULL,
- `Contact_No` int(100) NOT NULL,
- `Email` varchar(100) NOT NULL,
- `Pin` int(100) NOT NULL,
- `Designation` varchar(100) NOT NULL,
- `funding` int(11) DEFAULT NULL,
- PRIMARY KEY (`ID`)
+  `Name` varchar(100) NOT NULL,
+  `ID` int(100) NOT NULL,
+  `Contact_No` int(100) NOT NULL,
+  `Email` varchar(100) NOT NULL,
+  `Pin` int(100) NOT NULL,
+  `Designation` varchar(100) NOT NULL,
+  `funding` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 --
 -- Dumping data for table `oca`
 --
 
-INSERT INTO `oca` (`Name`, `ID`, `Contact_No`, `Email`, `Pin`, `Designation`, `funding`) VALUES 
-('mahmud', '1', '1345687', 'oca.mahmud@bracu.com', '12345', 'oca', NULL);
+INSERT INTO `oca` (`Name`, `ID`, `Contact_No`, `Email`, `Pin`, `Designation`, `funding`) VALUES
+('mahmud', 1, 1345687, 'oca.mahmud@bracu.com', 12345, 'oca', 0),
+('Kamal', 44, 1994442, 'oca.kamal@bracu.com', 12345, 'oca', 0);
 
 -- --------------------------------------------------------
 
@@ -288,6 +296,7 @@ CREATE TABLE `participate` (
 INSERT INTO `participate` (`member_id`, `event_id`) VALUES
 (2, 1),
 (2, 3),
+(11, 6),
 (12, 1),
 (12, 3),
 (21, 1),
@@ -315,7 +324,7 @@ CREATE TABLE `sponsor` (
 --
 
 INSERT INTO `sponsor` (`Email`, `Pin`, `name`, `Designation`, `funding`, `advisor_account`, `oca_id`) VALUES
-('hasanul@xybank.org', 12345, 'XY Bank', 'sponsor', 52000, 12345678, 1);
+('hasanul@xybank.org', 12345, 'XY Bank', 'sponsor', 57000, 12345678, 1);
 
 --
 -- Indexes for dumped tables
@@ -358,6 +367,12 @@ ALTER TABLE `funding_request`
 ALTER TABLE `member`
   ADD PRIMARY KEY (`student_id`),
   ADD UNIQUE KEY `email` (`email`);
+
+--
+-- Indexes for table `oca`
+--
+ALTER TABLE `oca`
+  ADD PRIMARY KEY (`ID`);
 
 --
 -- Indexes for table `participate`
