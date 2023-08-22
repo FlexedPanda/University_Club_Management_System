@@ -345,8 +345,7 @@ INSERT INTO `sponsor` (`Email`, `Pin`, `name`, `Designation`, `funding`, `adviso
  `OCA_ID` int(100) NOT NULL,
  `funding` int(11) DEFAULT NULL,
  `event` varchar(50) NOT NULL,
- PRIMARY KEY (`OCA_ID`,`event`),
- CONSTRAINT `test1` FOREIGN KEY (`OCA_ID`) REFERENCES `oca` (`ID`)
+ PRIMARY KEY (`OCA_ID`,`event`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 
