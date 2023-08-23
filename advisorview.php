@@ -384,17 +384,11 @@ $balance = $row[6];
 </table>
         </div>
     </div>
-<style>
-           .footer {
-            text-align: center;
-            margin-top: 20px;
-            padding: 10px;
-            background-color: rgba(0, 0, 0, 0);
-           }
-</style>
+
 <div class="footer">
     <p>&copy; 2023 University Club Management Platform. All rights reserved.</p>
   </div>
+
 </div>
 </body>
 </html>
