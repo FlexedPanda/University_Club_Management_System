@@ -317,15 +317,17 @@ INSERT INTO `participate` (`member_id`, `event_id`) VALUES
 --
 
 CREATE TABLE `sponsor` (
-  `Email` varchar(40) NOT NULL,
-  `Pin` int(11) NOT NULL,
-  `name` varchar(40) NOT NULL,
-  `Designation` varchar(40) NOT NULL,
-  `funding` int(11) NOT NULL,
-  `advisor_account` int(11) NOT NULL,
-  `oca_id` int(11) NOT NULL
+ `Email` varchar(40) NOT NULL,
+ `Pin` int(11) NOT NULL,
+ `name` varchar(40) NOT NULL,
+ `Designation` varchar(40) NOT NULL,
+ `funding` int(11) NOT NULL,
+ `advisor_account` int(11) DEFAULT NULL,
+ `oca_id` int(11) DEFAULT NULL,
+ PRIMARY KEY (`Email`),
+ KEY `oca_id` (`oca_id`),
+ KEY `advisor_account` (`advisor_account`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
 --
 -- Dumping data for table `sponsor`
 --
