@@ -400,13 +400,6 @@ ALTER TABLE `oca`
 ALTER TABLE `participate`
   ADD PRIMARY KEY (`member_id`,`event_id`);
 
---
--- Indexes for table `sponsor`
---
-ALTER TABLE `sponsor`
-  ADD PRIMARY KEY (`Email`),
-  ADD KEY `oca_id` (`oca_id`),
-  ADD KEY `advisor_account` (`advisor_account`);
 
 --
 -- Constraints for dumped tables
