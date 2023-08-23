@@ -1,3 +1,9 @@
+<?php
+if (isset($_GET['message'])) {
+    $message = urldecode($_GET['message']);
+    echo '<h2 style="text-align: center; background-color: rgba(0, 0, 0, 0.7); color: white; padding: 10px;">' . $message . '</h2>';
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,8 +44,11 @@
 			<div class="join">
 			<span id="c">or, Create Account</span>
 			<a href="register.php">Sign up</a>
-			</div>
-
+			<br>
+			<br>
+			<span id = "sponsor">Interested in Sponsorship?</span>
+			<a href="sponsor_signup.php">Sign up as Sponsor</a>
+			
 			</form>
 		</div>
 	</div>
