@@ -29,7 +29,9 @@
         // Retrieve the form data
         $sponsorLevel = $_POST["sponsor_level"];
         $amount = $_POST["amount"];
+        //header("Location: donate_submission.php?sponsorLevel=$sponsorLevel&amount=$amount");
 
+        
         $checkQuery = "SELECT * FROM funding_request WHERE sponsor_email = '$sponsorEmail' and event = '$eventName'";
         $checkResult = $conn->query($checkQuery);
 
@@ -42,7 +44,7 @@
 
         if ($checkResult->num_rows > 0) {
           
-          if ($donation+$amount<=$eventCost){
+          if ($moneyReceived+$amount<=$eventCost){
             $updateQuery = "UPDATE funding_request 
                             SET amount = amount + $amount
                             WHERE Sponsor_email = '$sponsorEmail' AND event = '$eventName'";
@@ -57,7 +59,7 @@
           }
         }
         else{
-          if ($donation + $amount<=$eventCost){
+          if ($moneyReceived + $amount<=$eventCost){
             $insertQuery = "INSERT INTO funding_request (Sponsor_email, event, amount)
                             VALUES ('$sponsorEmail', '$eventName', $amount)";
             $updateResult = $conn->query($insertQuery); 
@@ -85,7 +87,7 @@
             while($row = mysqli_fetch_array($result))
             $donation = $row[0];
         }
-    $ratio = $donation/$eventCost*100;
+    $ratio = $moneyReceived/$eventCost*100;
 
     $presiSql = "Select email,contact_no from member where designation= 'president' and club= '$clubName'";
     $presiResult = mysqli_query($conn,$presiSql);
@@ -115,6 +117,18 @@
     background-position: center;
     background-repeat: no-repeat;
   }
+  .navbar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    text-align: right;
+    border-bottom: 2px solid #4169E1; 
+    background-color: #808080;
+    padding: 10px;
+    width: 5%;
+    box-sizing: border-box;
+    z-index: 100;
+}
   header {
     background-color: #007BFF;
     color: white;
@@ -206,6 +220,10 @@
 </style>
 
 <body>
+<div class="navbar">
+        
+        <a href="logout.php">Log out</a>
+  </div>
   <header>
     <h1>University Management Platform</h1>
     <p>Sponsor View</p>
@@ -281,7 +299,7 @@
     </div>
 </div>
       <div class="donation-progress">
-        <p>Donation Progress: <?php echo $donation; ?> BDT / <?php echo $eventCost; ?> BDT</p>
+        <p>Donation Progress: <?php echo $moneyReceived; ?> BDT / <?php echo $eventCost; ?> BDT</p>
         <div style="border: 1px solid #ddd; height: 10px; width: 75%; margin: 10px auto;">
           <div style="background-color: #3498db; height: 100%; width: <?php echo $ratio; ?>%;"></div>
         </div>
