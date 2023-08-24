@@ -44,10 +44,7 @@ if (isset($_GET['message'])) {
 			<div class="join">
 			<span id="c">or, Create Account</span>
 			<a href="register.php">Sign up</a>
-			<br>
-			<br>
-			<span id = "sponsor">Interested in Sponsorship?</span>
-			<a href="sponsor_signup.php">Sign up as Sponsor</a>
+			
 			
 			</form>
 		</div>
