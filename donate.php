@@ -130,7 +130,7 @@
     z-index: 100;
 }
   header {
-    background-color: #007BFF;
+    background-color: rgb(50, 92, 112);
     color: white;
     text-align: center;
     padding: 10px 0;
@@ -140,13 +140,14 @@
     margin: 20px auto;
     padding: 20px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-    background-color: rgba(255, 255, 255, 0.9); /* Light background */
+    border-radius: 9px;
+    background-color: rgba(255, 255, 255, 0.9);
   }
   .event {
     padding: 20px;
     border: 1px solid #ddd;
     margin-bottom: 20px;
-    background-color: #007BFF; /* Blue background */
+    background-color: rgb(50, 92, 112);
     color: white;
   }
   .event h2 {
@@ -214,7 +215,7 @@
     text-align: center;
     margin-top: 20px;
     padding: 10px;
-    background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black background */
+    background-color: rgb(50, 92, 112);
     color: white;
   }
 </style>
@@ -278,7 +279,7 @@
 
     <div class="sponsor-box">
       <div class="sponsor-level">Bronze Sponsor:</div>
-      <div>1000 BDT</div>
+      
       <div class="benefits">
         <div class="tick">&#10003; Logo placement</div>
       </div>
