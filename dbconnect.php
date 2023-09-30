@@ -1,23 +1,17 @@
 <?php
+// Database connection parameters
+$hostname = 'db';        // Hostname (use the container name or IP)
+$username = 'php_docker'; // MySQL username
+$password = 'password';  // MySQL password
+$database = 'php_docker'; // Database name
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "project1";
+// Create a connection to the MySQL database
+$conn = mysqli_connect($hostname, $username, $password, $database);
 
-//creating connection
-
-$conn = new mysqli($servername, $username, $password);
-
-//check connection 
-if($conn->connect_error){
-	die("Connection failed: " . $conn->connect_error);
-	}
-
-else{
-	mysqli_select_db($conn, $dbname);
-	//echo "Connection successful";
-	}
+// Check if the connection was successful
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
+}
 
 
 ?>
