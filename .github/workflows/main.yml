@@ -1,0 +1,23 @@
+name: Docker Image Validation
+
+on:
+  pull_request:
+    branches:
+      - main # Adjust to the branch you want to trigger the workflow on
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Docker
+      uses: docker/setup-buildx-action@v3
+
+    - name: Build Docker Image
+      run: docker build -t my-custom-php-image -f MyDockerfile .
+      
+    - name: Docker Compose
+      run: docker-compose up
