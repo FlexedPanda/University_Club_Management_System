@@ -17,7 +17,9 @@ jobs:
       uses: docker/setup-buildx-action@v3
 
     - name: Build Docker Image
-      run: docker build -t my-custom-php-image -f /path/to/Dockerfile .
+      run: |
+        docker build -t my-custom-php-image -f MyDockerfile.dockerfile.
+        docker run -d my-custom-php-image
       
     - name: Docker Compose
       run: docker-compose up
