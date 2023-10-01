@@ -20,7 +20,7 @@ jobs:
 
     - name: Build Docker Image
       run: |
-        docker build -t my-custom-php-image -f MyDockerfile.dockerfile.
+        docker buildx build -t my-custom-php-image -f MyDockerfile.dockerfile .
         docker run -d my-custom-php-image
       
     - name: Docker Compose
